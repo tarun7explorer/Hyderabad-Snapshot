@@ -8,7 +8,7 @@ interface MobileTimelineProps {
 
 const MobileTimeline = ({ onNodeClick, activeSection }: MobileTimelineProps) => {
   return (
-    <div className="relative py-16 px-4">
+    <div className="relative py-12 px-3 sm:py-16 sm:px-4 overflow-x-hidden">
       {/* Glowing timeline line */}
       <div 
         className="absolute left-8 top-0 bottom-0 w-1 rounded-full"
@@ -51,7 +51,7 @@ const MobileTimeline = ({ onNodeClick, activeSection }: MobileTimelineProps) => 
 
               {/* Glassmorphic content card */}
               <motion.div
-                className="overflow-hidden rounded-2xl cursor-pointer"
+                className="overflow-hidden rounded-xl sm:rounded-2xl cursor-pointer max-w-full"
                 style={{
                   background: "hsla(0, 0%, 100%, 0.03)",
                   backdropFilter: "blur(12px)",
@@ -82,14 +82,14 @@ const MobileTimeline = ({ onNodeClick, activeSection }: MobileTimelineProps) => 
                 </div>
 
                 {/* Content */}
-                <div className="p-5">
+                <div className="p-4 sm:p-5">
                   <h3
-                    className="font-serif text-xl font-bold mb-2"
+                    className="font-serif text-lg sm:text-xl font-bold mb-2"
                     style={{ color: section.accentColor }}
                   >
                     {section.title}
                   </h3>
-                  <p className="text-sm text-muted-foreground line-clamp-2">
+                  <p className="text-xs sm:text-sm text-muted-foreground line-clamp-2">
                     {section.tagline}
                   </p>
                 </div>
