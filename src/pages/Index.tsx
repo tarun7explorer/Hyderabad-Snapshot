@@ -181,93 +181,118 @@ const Index = () => {
           />
         </section>
 
-        {/* Final Destination Flashcard */}
-        <div className="relative z-20 flex flex-col items-center pb-16 sm:pb-24">
-          {/* Connection line from path to flashcard */}
+        {/* Final Destination - Unified Path + Flashcard Container (ZERO GAP) */}
+        <div className="relative z-20 flex flex-col items-center pb-16 sm:pb-24" style={{ gap: 0 }}>
+          {/* Connection line - extends to overlap flashcard border */}
           <motion.div
             className="w-1.5 relative"
             style={{
-              height: "80px",
+              height: "100px",
+              marginBottom: "-14px", /* Overlap into flashcard by 2px past the border */
               background: "linear-gradient(to bottom, hsl(330 100% 60%) 0%, hsl(330 100% 55%) 100%)",
               borderRadius: "4px",
               boxShadow: `
                 0 0 15px hsl(330 100% 60% / 1),
                 0 0 30px hsl(330 100% 55% / 0.8),
-                0 0 50px hsl(330 100% 50% / 0.5)
+                0 0 50px hsl(330 100% 50% / 0.5),
+                0 0 80px hsl(330 100% 50% / 0.3)
               `,
+              zIndex: 30,
             }}
             initial={{ scaleY: 0, originY: 0 }}
             whileInView={{ scaleY: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-          />
-          
-          {/* Pulsing node at connection point */}
-          <motion.div
-            className="relative z-10"
-            style={{ marginTop: "-8px" }}
           >
+            {/* Energy flow animation in the line */}
             <motion.div
-              className="w-4 h-4 rounded-full"
+              className="absolute left-0 right-0 h-8 rounded-full"
               style={{
-                background: "hsl(330 100% 60%)",
-                boxShadow: `
-                  0 0 15px hsl(330 100% 60% / 1),
-                  0 0 30px hsl(330 100% 55% / 0.8),
-                  0 0 50px hsl(330 100% 50% / 0.5)
-                `,
+                background: "linear-gradient(to bottom, transparent, hsl(330 100% 80% / 0.9), transparent)",
               }}
-              animate={{
-                scale: [1, 1.3, 1],
-                boxShadow: [
-                  `0 0 15px hsl(330 100% 60% / 1), 0 0 30px hsl(330 100% 55% / 0.8), 0 0 50px hsl(330 100% 50% / 0.5)`,
-                  `0 0 25px hsl(330 100% 60% / 1), 0 0 50px hsl(330 100% 55% / 0.9), 0 0 80px hsl(330 100% 50% / 0.6)`,
-                  `0 0 15px hsl(330 100% 60% / 1), 0 0 30px hsl(330 100% 55% / 0.8), 0 0 50px hsl(330 100% 50% / 0.5)`,
-                ],
-              }}
-              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            />
-            {/* Outer pulse ring */}
-            <motion.div
-              className="absolute inset-0 rounded-full"
-              style={{ border: "2px solid hsl(330 100% 60%)" }}
-              animate={{ scale: [1, 2.5], opacity: [0.8, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity, ease: "easeOut" }}
+              animate={{ top: ["-32px", "100px"] }}
+              transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
             />
           </motion.div>
 
-          {/* Glassmorphism Flashcard */}
+          {/* Glassmorphism Flashcard - path physically connects to top */}
           <motion.div
-            className="relative mx-4 sm:mx-8 mt-6 max-w-xl w-full"
+            className="relative mx-4 sm:mx-8 max-w-xl w-full"
+            style={{ zIndex: 20 }}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
+            {/* Terminal dot - "plugged into" the card at intersection */}
+            <motion.div
+              className="absolute left-1/2 -translate-x-1/2 z-40"
+              style={{ top: "-8px" }}
+            >
+              <motion.div
+                className="w-5 h-5 rounded-full"
+                style={{
+                  background: "radial-gradient(circle at 30% 30%, hsl(330 100% 75%), hsl(330 100% 55%))",
+                  boxShadow: `
+                    0 0 12px hsl(330 100% 60% / 1),
+                    0 0 24px hsl(330 100% 55% / 0.9),
+                    0 0 40px hsl(330 100% 50% / 0.6),
+                    0 0 60px hsl(330 100% 50% / 0.4)
+                  `,
+                }}
+                animate={{
+                  scale: [1, 1.15, 1],
+                  boxShadow: [
+                    `0 0 12px hsl(330 100% 60% / 1), 0 0 24px hsl(330 100% 55% / 0.9), 0 0 40px hsl(330 100% 50% / 0.6), 0 0 60px hsl(330 100% 50% / 0.4)`,
+                    `0 0 20px hsl(330 100% 60% / 1), 0 0 40px hsl(330 100% 55% / 1), 0 0 60px hsl(330 100% 50% / 0.8), 0 0 90px hsl(330 100% 50% / 0.5)`,
+                    `0 0 12px hsl(330 100% 60% / 1), 0 0 24px hsl(330 100% 55% / 0.9), 0 0 40px hsl(330 100% 50% / 0.6), 0 0 60px hsl(330 100% 50% / 0.4)`,
+                  ],
+                }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              />
+              {/* Outer pulse ring */}
+              <motion.div
+                className="absolute inset-0 rounded-full"
+                style={{ border: "2px solid hsl(330 100% 60%)" }}
+                animate={{ scale: [1, 2.2], opacity: [0.7, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: "easeOut" }}
+              />
+            </motion.div>
+
             <div
               className="relative px-6 py-8 sm:px-10 sm:py-12 rounded-2xl text-center overflow-hidden"
               style={{
-                background: "hsla(0, 0%, 8%, 0.7)",
+                background: "hsla(0, 0%, 8%, 0.75)",
                 backdropFilter: "blur(20px)",
                 WebkitBackdropFilter: "blur(20px)",
-                border: "1px solid hsl(330 100% 55% / 0.5)",
+                border: "1.5px solid hsl(330 100% 55% / 0.6)",
                 boxShadow: `
-                  0 0 30px hsl(330 100% 55% / 0.3),
-                  0 0 60px hsl(330 100% 50% / 0.15),
-                  inset 0 0 30px hsl(330 100% 55% / 0.05)
+                  0 -8px 30px hsl(330 100% 55% / 0.35),
+                  0 0 40px hsl(330 100% 55% / 0.25),
+                  0 0 80px hsl(330 100% 50% / 0.15),
+                  inset 0 0 40px hsl(330 100% 55% / 0.06)
                 `,
               }}
             >
+              {/* Glow spill on top edge - path energy entering the box */}
+              <div
+                className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 pointer-events-none"
+                style={{
+                  background: "radial-gradient(ellipse at center top, hsl(330 100% 60% / 0.5) 0%, transparent 70%)",
+                  filter: "blur(8px)",
+                }}
+              />
+              
               {/* Subtle inner glow gradient */}
               <div
                 className="absolute inset-0 pointer-events-none"
                 style={{
-                  background: "radial-gradient(ellipse at center, hsl(330 100% 60% / 0.08) 0%, transparent 70%)",
+                  background: "radial-gradient(ellipse at center top, hsl(330 100% 60% / 0.1) 0%, transparent 60%)",
                 }}
               />
               
               {/* Content */}
-              <div className="relative z-10">
+              <div className="relative z-10 pt-4">
                 <p
                   className="text-base sm:text-lg md:text-xl mb-4 sm:mb-6 font-light tracking-wide"
                   style={{
