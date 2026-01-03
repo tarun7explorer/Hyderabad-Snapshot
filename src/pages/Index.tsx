@@ -62,8 +62,8 @@ const Index = () => {
             backgroundPosition: "center",
           }}
         />
-        {/* Dark Overlay */}
-        <div className="absolute inset-0 bg-black/70" />
+        {/* Dark Overlay - enhanced for text visibility */}
+        <div className="absolute inset-0 bg-black/75" />
         
         {/* Content */}
         <div className="relative z-10">
@@ -84,15 +84,16 @@ const Index = () => {
           <div 
             className="flex items-center justify-center gap-4 pt-8"
             style={{
-              borderTop: "1px solid hsla(0, 0%, 100%, 0.1)",
+              borderTop: "1px solid hsla(0, 0%, 100%, 0.15)",
             }}
           >
             <span 
               className="text-lg sm:text-xl md:text-2xl tracking-wide"
               style={{
                 fontFamily: "Inter, system-ui, sans-serif",
-                fontWeight: 400,
-                color: "hsl(0 0% 85%)",
+                fontWeight: 500,
+                color: "hsl(0, 0%, 100%)",
+                textShadow: "0 0 10px hsl(0 0% 100% / 0.3)",
               }}
             >
               Made by Tarun Tej Gajibimkar

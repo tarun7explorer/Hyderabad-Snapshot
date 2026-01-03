@@ -48,11 +48,11 @@ const FeatureCard = ({ section, index, onClick, isActive }: FeatureCardProps) =>
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               layoutId={`image-${section.id}`}
             />
-            {/* Gradient overlay */}
+            {/* Enhanced gradient overlay for text readability */}
             <div 
               className="absolute inset-0"
               style={{
-                background: `linear-gradient(to top, hsl(0 0% 2%) 0%, transparent 50%, ${section.accentColor}20 100%)`,
+                background: `linear-gradient(to top, hsl(0 0% 2%) 0%, hsl(0 0% 2% / 0.6) 40%, transparent 70%, ${section.accentColor}15 100%)`,
               }}
             />
             
@@ -71,16 +71,30 @@ const FeatureCard = ({ section, index, onClick, isActive }: FeatureCardProps) =>
             </motion.div>
           </div>
 
-          {/* Content */}
-          <div className="p-6">
+          {/* Content with enhanced readability */}
+          <div 
+            className="p-6 relative"
+            style={{
+              background: "linear-gradient(to top, hsl(0 0% 4% / 0.95) 0%, hsl(0 0% 4% / 0.8) 100%)",
+            }}
+          >
             <motion.h3
               className="font-serif text-2xl font-bold mb-3"
-              style={{ color: section.accentColor }}
+              style={{ 
+                color: section.accentColor,
+                textShadow: `0 0 20px ${section.accentColor}60`,
+              }}
               layoutId={`title-${section.id}`}
             >
               {section.title}
             </motion.h3>
-            <p className="text-muted-foreground text-sm leading-relaxed line-clamp-2">
+            <p 
+              className="text-sm leading-relaxed line-clamp-2"
+              style={{
+                color: "hsl(0, 0%, 100%)",
+                lineHeight: 1.7,
+              }}
+            >
               {section.tagline}
             </p>
 
