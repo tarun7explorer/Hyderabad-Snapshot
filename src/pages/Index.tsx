@@ -181,32 +181,33 @@ const Index = () => {
           />
         </section>
 
-        {/* Final Destination - Unified Path + Flashcard Container (ZERO GAP) */}
-        <div className="relative z-20 flex flex-col items-center pb-16 sm:pb-24" style={{ gap: 0 }}>
-          {/* Connection line - extends to overlap flashcard border */}
+        {/* Final Destination - Unified Path + Flashcard Container (ZERO GAP, Physical Merger) */}
+        <div 
+          className="relative z-20 flex flex-col items-center pb-16 sm:pb-24"
+          style={{ gap: 0 }}
+        >
+          {/* Connection line - physically overlaps flashcard by 5px */}
           <motion.div
-            className="w-1.5 relative"
-            style={{
-              height: "100px",
-              marginBottom: "-14px", /* Overlap into flashcard by 2px past the border */
-              background: "linear-gradient(to bottom, hsl(330 100% 60%) 0%, hsl(330 100% 55%) 100%)",
-              borderRadius: "4px",
-              boxShadow: `
-                0 0 15px hsl(330 100% 60% / 1),
-                0 0 30px hsl(330 100% 55% / 0.8),
-                0 0 50px hsl(330 100% 50% / 0.5),
-                0 0 80px hsl(330 100% 50% / 0.3)
-              `,
-              zIndex: 30,
-            }}
-            initial={{ scaleY: 0, originY: 0 }}
-            whileInView={{ scaleY: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="relative flex flex-col items-center"
+            style={{ zIndex: 35 }}
           >
+            <div
+              className="w-1.5"
+              style={{
+                height: "100px",
+                background: "linear-gradient(to bottom, hsl(330 100% 60%) 0%, hsl(330 100% 55%) 100%)",
+                borderRadius: "4px",
+                boxShadow: `
+                  0 0 15px hsl(330 100% 60% / 1),
+                  0 0 30px hsl(330 100% 55% / 0.8),
+                  0 0 50px hsl(330 100% 50% / 0.5),
+                  0 0 80px hsl(330 100% 50% / 0.3)
+                `,
+              }}
+            />
             {/* Energy flow animation in the line */}
             <motion.div
-              className="absolute left-0 right-0 h-8 rounded-full"
+              className="absolute left-1/2 -translate-x-1/2 w-1.5 h-8 rounded-full"
               style={{
                 background: "linear-gradient(to bottom, transparent, hsl(330 100% 80% / 0.9), transparent)",
               }}
@@ -215,19 +216,22 @@ const Index = () => {
             />
           </motion.div>
 
-          {/* Glassmorphism Flashcard - path physically connects to top */}
+          {/* Glassmorphism Flashcard - positioned to receive path overlap */}
           <motion.div
             className="relative mx-4 sm:mx-8 max-w-xl w-full"
-            style={{ zIndex: 20 }}
+            style={{ 
+              zIndex: 20,
+              marginTop: "-5px", /* Path overlaps INTO the card by 5px */
+            }}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
-            {/* Terminal dot - "plugged into" the card at intersection */}
+            {/* Terminal dot - bridges both path and card (half on line, half inside box) */}
             <motion.div
               className="absolute left-1/2 -translate-x-1/2 z-40"
-              style={{ top: "-8px" }}
+              style={{ top: "-10px" }} /* Positioned so half sits on line, half on card border */
             >
               <motion.div
                 className="w-5 h-5 rounded-full"
@@ -267,19 +271,19 @@ const Index = () => {
                 WebkitBackdropFilter: "blur(20px)",
                 border: "1.5px solid hsl(330 100% 55% / 0.6)",
                 boxShadow: `
-                  0 -8px 30px hsl(330 100% 55% / 0.35),
+                  0 -8px 30px hsl(330 100% 55% / 0.4),
                   0 0 40px hsl(330 100% 55% / 0.25),
                   0 0 80px hsl(330 100% 50% / 0.15),
-                  inset 0 0 40px hsl(330 100% 55% / 0.06)
+                  inset 0 0 40px hsl(330 100% 55% / 0.08)
                 `,
               }}
             >
               {/* Glow spill on top edge - path energy entering the box */}
               <div
-                className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 pointer-events-none"
+                className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-8 pointer-events-none"
                 style={{
-                  background: "radial-gradient(ellipse at center top, hsl(330 100% 60% / 0.5) 0%, transparent 70%)",
-                  filter: "blur(8px)",
+                  background: "radial-gradient(ellipse at center top, hsl(330 100% 60% / 0.6) 0%, transparent 70%)",
+                  filter: "blur(10px)",
                 }}
               />
               
@@ -287,7 +291,7 @@ const Index = () => {
               <div
                 className="absolute inset-0 pointer-events-none"
                 style={{
-                  background: "radial-gradient(ellipse at center top, hsl(330 100% 60% / 0.1) 0%, transparent 60%)",
+                  background: "radial-gradient(ellipse at center top, hsl(330 100% 60% / 0.12) 0%, transparent 60%)",
                 }}
               />
               
