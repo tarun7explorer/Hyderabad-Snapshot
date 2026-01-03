@@ -3,6 +3,7 @@ import HeroSection from "@/components/HeroSection";
 import GlowRoad from "@/components/GlowRoad";
 import MobileTimeline from "@/components/MobileTimeline";
 import DetailView from "@/components/DetailView";
+import BackToTop from "@/components/BackToTop";
 import { sections, Section } from "@/data/hyderabadContent";
 
 const Index = () => {
@@ -60,14 +61,18 @@ const Index = () => {
           Discover the pearl of the Deccan
         </p>
         <p 
-          className="text-nizam-gold font-serif text-xl mt-3"
+          className="font-serif text-xl mt-3"
           style={{
-            textShadow: "0 0 20px hsl(45 90% 53% / 0.3)",
+            color: "hsl(50 100% 55%)",
+            textShadow: "0 0 20px hsl(50 100% 55% / 0.4)",
           }}
         >
           Hyderabad Snapshot
         </p>
       </footer>
+
+      {/* Back to Top Button */}
+      <BackToTop />
 
       {/* Detail View with Shared Element Transitions */}
       <DetailView

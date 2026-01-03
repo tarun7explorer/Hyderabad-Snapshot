@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { X, ChevronLeft, ChevronRight, ArrowUp } from "lucide-react";
 import { sections, Section } from "@/data/hyderabadContent";
 
 interface DetailViewProps {
@@ -23,7 +23,7 @@ const DetailView = ({ section, isOpen, onClose, onNavigate }: DetailViewProps) =
           {/* Backdrop */}
           <motion.div
             className="fixed inset-0 z-50"
-            style={{ background: "hsl(0 0% 2% / 0.95)" }}
+            style={{ background: "hsl(0 0% 2% / 0.98)" }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -87,7 +87,7 @@ const DetailView = ({ section, isOpen, onClose, onNavigate }: DetailViewProps) =
 
             {/* Hero Image with shared element transition */}
             <motion.div
-              className="relative h-[60vh] overflow-hidden"
+              className="relative h-[50vh] overflow-hidden"
               layoutId={`image-${section.id}`}
             >
               <img
@@ -99,13 +99,13 @@ const DetailView = ({ section, isOpen, onClose, onNavigate }: DetailViewProps) =
               <div
                 className="absolute inset-0"
                 style={{
-                  background: `linear-gradient(to top, hsl(0 0% 2%) 0%, transparent 50%)`,
+                  background: `linear-gradient(to top, hsl(0 0% 2%) 0%, transparent 60%)`,
                 }}
               />
               <div
                 className="absolute inset-0"
                 style={{
-                  background: `linear-gradient(to bottom, hsl(0 0% 2% / 0.5) 0%, transparent 30%)`,
+                  background: `linear-gradient(to bottom, hsl(0 0% 2% / 0.6) 0%, transparent 30%)`,
                 }}
               />
               
@@ -122,7 +122,7 @@ const DetailView = ({ section, isOpen, onClose, onNavigate }: DetailViewProps) =
             </motion.div>
 
             {/* Content */}
-            <div className="relative -mt-32 px-6 md:px-12 lg:px-24 pb-20">
+            <div className="relative -mt-24 px-6 md:px-12 lg:px-24 pb-20">
               {/* Icon and Title */}
               <div className="mb-12">
                 <motion.div
@@ -147,7 +147,7 @@ const DetailView = ({ section, isOpen, onClose, onNavigate }: DetailViewProps) =
                 </motion.h1>
 
                 <motion.p
-                  className="text-xl md:text-2xl text-muted-foreground max-w-2xl"
+                  className="text-xl md:text-2xl text-muted-foreground max-w-3xl"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 }}
@@ -165,12 +165,12 @@ const DetailView = ({ section, isOpen, onClose, onNavigate }: DetailViewProps) =
                 />
               </div>
 
-              {/* Items Grid */}
-              <div className="grid gap-8 md:grid-cols-2">
+              {/* Masonry Grid - 10-15 Items */}
+              <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
                 {section.items.map((item, index) => (
                   <motion.div
                     key={item.id}
-                    className="relative overflow-hidden rounded-2xl group"
+                    className="break-inside-avoid relative overflow-hidden rounded-2xl group"
                     style={{
                       background: "hsla(0, 0%, 100%, 0.03)",
                       backdropFilter: "blur(12px)",
@@ -178,14 +178,19 @@ const DetailView = ({ section, isOpen, onClose, onNavigate }: DetailViewProps) =
                     }}
                     initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.3 + index * 0.15 }}
+                    transition={{ delay: 0.2 + index * 0.08 }}
                     whileHover={{
                       borderColor: `${section.accentColor}50`,
                       boxShadow: `0 0 40px ${section.accentColor}20`,
                     }}
                   >
-                    {/* Item Image */}
-                    <div className="relative h-56 overflow-hidden">
+                    {/* Item Image - varying heights for masonry effect */}
+                    <div 
+                      className="relative overflow-hidden"
+                      style={{ 
+                        height: `${140 + (index % 3) * 40}px` 
+                      }}
+                    >
                       <motion.img
                         src={item.image}
                         alt={item.name}
@@ -200,14 +205,14 @@ const DetailView = ({ section, isOpen, onClose, onNavigate }: DetailViewProps) =
                     </div>
 
                     {/* Item Content */}
-                    <div className="p-6">
+                    <div className="p-5">
                       <h3
-                        className="font-serif text-2xl font-bold mb-3"
+                        className="font-serif text-lg font-bold mb-2"
                         style={{ color: section.accentColor }}
                       >
                         {item.name}
                       </h3>
-                      <p className="text-muted-foreground leading-relaxed">
+                      <p className="text-muted-foreground text-sm leading-relaxed line-clamp-2">
                         {item.description}
                       </p>
                     </div>
