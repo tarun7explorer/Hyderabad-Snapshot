@@ -10,12 +10,12 @@ interface UnifiedGlowPathProps {
 const UnifiedGlowPath = ({ scrollProgress, currentSectionIndex }: UnifiedGlowPathProps) => {
   const pathRef = useRef<SVGPathElement>(null);
 
-  // Single continuous path from start through all sections to finale
-  // Total height: 200 (bridge) + 3200 (main road with galleries) + 200 (finale) = 3600
+  // Single continuous path from top of viewport through all sections to finale
+  // Path starts cleanly from top without any starting icon
   const unifiedPathD = `
-    M 50 0
-    L 50 200
-    C 50 220, 35 300, 35 400
+    M 50 -50
+    L 50 100
+    C 50 150, 35 250, 35 400
     S 65 600, 50 750
     C 35 900, 30 1050, 50 1200
     S 70 1350, 65 1500
@@ -54,17 +54,13 @@ const UnifiedGlowPath = ({ scrollProgress, currentSectionIndex }: UnifiedGlowPat
         preserveAspectRatio="none"
       >
         <defs>
-          {/* Extended gradient from golden start through all sections to pink finale */}
+          {/* Gradient through all sections to pink finale */}
           <linearGradient id="unifiedRoadGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-            {/* Golden/Yellow start (Begin Journey) */}
-            <stop offset="0%" stopColor="hsl(50 100% 55%)" />
-            <stop offset="4%" stopColor="hsl(45 100% 52%)" />
-            <stop offset="8%" stopColor="hsl(30 100% 50%)" />
-            {/* Section colors */}
+            {/* Section colors flowing through the path */}
             {sections.map((section, i) => (
               <stop
                 key={section.id}
-                offset={`${10 + (i / (sections.length - 1)) * 80}%`}
+                offset={`${(i / (sections.length - 1)) * 90}%`}
                 stopColor={section.glowColor}
               />
             ))}
@@ -175,19 +171,7 @@ const UnifiedGlowPath = ({ scrollProgress, currentSectionIndex }: UnifiedGlowPat
           </motion.circle>
         ))}
 
-        {/* Start node (Begin Journey anchor) */}
-        <motion.circle
-          cx="50"
-          cy="10"
-          r="8"
-          fill="hsl(50 100% 55%)"
-          filter="url(#unifiedNeonGlow)"
-          animate={{
-            scale: [1, 1.2, 1],
-          }}
-          transition={{ duration: 2, repeat: Infinity }}
-        />
-        <circle cx="50" cy="10" r="3" fill="white" opacity="0.9" />
+        {/* Road starts cleanly from top - no start node */}
 
         {/* Section markers (glowing nodes with pulsing halos) */}
         {cardPositions.map((pos, i) => {
