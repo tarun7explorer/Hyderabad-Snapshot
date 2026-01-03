@@ -136,7 +136,7 @@ const HeroSection = () => {
 
         {/* Sub-tagline with intense warm glow */}
         <motion.p
-          className="font-serif italic mb-8 sm:mb-10"
+          className="font-serif italic mb-4 sm:mb-6"
           style={{
             fontSize: "clamp(1rem, 3vw, 1.25rem)",
             color: "hsl(0, 0%, 100%)",
@@ -154,12 +154,30 @@ const HeroSection = () => {
           Dil se Hyderabadi
         </motion.p>
 
+        {/* 3-line Hyderabad description */}
+        <motion.p
+          className="max-w-3xl mx-auto mb-6 sm:mb-8 font-sans text-center px-2"
+          style={{
+            fontSize: "clamp(0.8rem, 2vw, 1rem)",
+            lineHeight: 1.8,
+            color: "hsl(0, 0%, 95%)",
+            textShadow: "0 0 8px hsl(0 0% 0% / 0.8)",
+          }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5, duration: 0.8 }}
+        >
+          Hyderabad, the "City of Pearls," is a captivating blend of 400 years of history and a rapidly growing global technology hub. As the capital of Telangana, it is world-renowned for its iconic Charminar and the aromatic Hyderabadi Biryani, reflecting a rich Nizami heritage.
+          <br /><br />
+          Today, the city stands as a premier destination for the IT and pharmaceutical industries. Its unique charm lies in the seamless coexistence of ancient palaces and bustling traditional bazaars with modern glass skyscrapers and a vibrant, cosmopolitan lifestyle.
+        </motion.p>
+
         {/* Decorative glowing line */}
         <motion.div
-          className="w-40 h-[2px] mx-auto rounded-full relative"
+          className="w-40 h-[2px] mx-auto rounded-full relative mb-8 sm:mb-10"
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
-          transition={{ delay: 1.5, duration: 0.8 }}
+          transition={{ delay: 1.7, duration: 0.8 }}
         >
           <div 
             className="absolute inset-0 rounded-full"
@@ -169,45 +187,50 @@ const HeroSection = () => {
             }}
           />
         </motion.div>
-      </motion.div>
 
-      {/* Scroll indicator */}
-      <motion.div
-        className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 cursor-pointer group"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.8, duration: 0.8 }}
-        onClick={() => window.scrollTo({ top: window.innerHeight, behavior: "smooth" })}
-      >
-        <span 
-          className="text-xs tracking-[0.2em] uppercase font-medium"
-          style={{
-            color: "hsl(50 100% 60%)",
-            textShadow: "0 0 10px hsl(50 100% 55% / 0.8), 0 0 20px hsl(50 100% 50% / 0.5)",
-          }}
+        {/* Begin Journey Button - positioned to connect with Glow Road */}
+        <motion.button
+          className="flex flex-col items-center gap-3 cursor-pointer group mx-auto"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.9, duration: 0.8 }}
+          onClick={() => window.scrollTo({ top: window.innerHeight, behavior: "smooth" })}
         >
-          Begin Journey
-        </span>
-        <motion.div
-          className="p-2 rounded-full"
-          style={{
-            background: "hsla(0, 0%, 100%, 0.08)",
-            border: "2px solid hsl(50, 100%, 55%)",
-            boxShadow: `
-              0 0 15px hsl(50 100% 55% / 0.8),
-              0 0 30px hsl(50 100% 55% / 0.5),
-              0 0 50px hsl(50 100% 55% / 0.3),
-              inset 0 0 10px hsl(50 100% 55% / 0.2)
-            `,
-          }}
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity }}
-        >
-          <ChevronDown 
-            className="w-5 h-5" 
-            style={{ color: "hsl(50 100% 60%)" }}
-          />
-        </motion.div>
+          <span 
+            className="text-sm sm:text-base tracking-[0.2em] uppercase font-semibold"
+            style={{
+              color: "hsl(50 100% 60%)",
+              textShadow: "0 0 10px hsl(50 100% 55% / 0.8), 0 0 20px hsl(50 100% 50% / 0.5)",
+            }}
+          >
+            Begin Journey
+          </span>
+          <motion.div
+            className="p-3 rounded-full"
+            style={{
+              background: "hsla(50, 100%, 55%, 0.15)",
+              border: "2px solid hsl(50, 100%, 55%)",
+              boxShadow: `
+                0 0 15px hsl(50 100% 55% / 0.9),
+                0 0 30px hsl(50 100% 55% / 0.6),
+                0 0 50px hsl(50 100% 55% / 0.4),
+                0 0 80px hsl(50 100% 55% / 0.3),
+                inset 0 0 15px hsl(50 100% 55% / 0.3)
+              `,
+            }}
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+            whileHover={{ scale: 1.1 }}
+          >
+            <ChevronDown 
+              className="w-6 h-6" 
+              style={{ 
+                color: "hsl(50 100% 60%)",
+                filter: "drop-shadow(0 0 5px hsl(50 100% 55%))",
+              }}
+            />
+          </motion.div>
+        </motion.button>
       </motion.div>
     </section>
   );
