@@ -34,16 +34,19 @@ const Index = () => {
 
   return (
     <main className="min-h-screen" style={{ background: "hsl(0 0% 2%)" }}>
-      {/* Hero Section */}
-      <HeroSection />
+      {/* Hero Section - overflow visible for seamless connection */}
+      <div className="relative" style={{ overflow: "visible" }}>
+        <HeroSection />
+      </div>
 
-      {/* Begin Journey Button - Flush at top of black section with bridge to path */}
+      {/* Unified Anchor Component - Begin Journey + Bridge + Path Connection */}
       <div 
-        className="relative z-30 flex flex-col items-center" 
-        style={{ marginTop: "-20px" }}
+        className="relative z-30 flex flex-col items-center"
+        style={{ marginTop: "-60px" }}
       >
+        {/* Begin Journey Button */}
         <motion.button
-          className="flex flex-col items-center gap-2 sm:gap-3 cursor-pointer group"
+          className="flex flex-col items-center gap-2 sm:gap-3 cursor-pointer group relative z-10"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.9, duration: 0.8 }}
@@ -111,33 +114,50 @@ const Index = () => {
           </motion.div>
         </motion.button>
         
-        {/* Vertical bridge line - connects yellow arrow to orange heritage path */}
+        {/* Physical Bridge Line - starts inside arrow circle, extends to path */}
         <motion.div
-          className="w-1 rounded-full"
+          className="w-1.5 rounded-full relative"
           style={{
-            height: "120px",
-            background: "linear-gradient(to bottom, hsl(50 100% 55%) 0%, hsl(35 100% 50%) 30%, hsl(25 100% 50%) 100%)",
+            height: "180px",
+            marginTop: "-12px",
+            background: "linear-gradient(to bottom, hsl(50 100% 55%) 0%, hsl(40 100% 52%) 20%, hsl(25 100% 50%) 100%)",
             boxShadow: `
-              0 0 10px hsl(25 100% 50% / 1),
-              0 0 20px hsl(25 100% 50% / 0.8),
-              0 0 40px hsl(25 100% 50% / 0.5),
-              0 0 60px hsl(25 100% 50% / 0.3)
+              0 0 12px hsl(25 100% 50% / 1),
+              0 0 25px hsl(25 100% 50% / 0.9),
+              0 0 50px hsl(25 100% 50% / 0.6),
+              0 0 80px hsl(25 100% 50% / 0.4),
+              0 0 120px hsl(25 100% 50% / 0.2)
             `,
           }}
           initial={{ scaleY: 0, originY: 0 }}
           animate={{ 
             scaleY: 1,
-            opacity: [0.8, 1, 0.8],
           }}
           transition={{ 
             scaleY: { delay: 2.2, duration: 0.8, ease: "easeOut" },
-            opacity: { delay: 3, duration: 2, repeat: Infinity, ease: "easeInOut" }
           }}
-        />
+        >
+          {/* Flowing energy pulse inside bridge */}
+          <motion.div
+            className="absolute left-0 right-0 h-8 rounded-full"
+            style={{
+              background: "linear-gradient(to bottom, transparent, hsl(50 100% 70% / 0.8), transparent)",
+            }}
+            animate={{
+              top: ["-32px", "180px"],
+            }}
+            transition={{
+              duration: 1.5,
+              repeat: Infinity,
+              ease: "linear",
+              delay: 3,
+            }}
+          />
+        </motion.div>
       </div>
 
-      {/* Glow Road - Desktop */}
-      <section className="hidden md:block">
+      {/* Glow Road - Desktop (positioned to connect with bridge) */}
+      <section className="hidden md:block" style={{ marginTop: "-2px" }}>
         <GlowRoad
           onCardClick={handleCardClick}
           activeSection={selectedSection?.id || null}
@@ -145,7 +165,7 @@ const Index = () => {
       </section>
 
       {/* Mobile Timeline */}
-      <section className="md:hidden">
+      <section className="md:hidden" style={{ marginTop: "-2px" }}>
         <MobileTimeline
           onNodeClick={handleCardClick}
           activeSection={selectedSection?.id || null}
