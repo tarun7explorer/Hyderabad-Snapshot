@@ -5,7 +5,7 @@ import MobileTimeline from "@/components/MobileTimeline";
 import DetailView from "@/components/DetailView";
 import BackToTop from "@/components/BackToTop";
 import { sections, Section } from "@/data/hyderabadContent";
-import footerBg from "@/assets/footer-buddha.jpg";
+import footerBg from "@/assets/golconda-sunset.jpg";
 
 const Index = () => {
   const [selectedSection, setSelectedSection] = useState<Section | null>(null);
@@ -52,7 +52,7 @@ const Index = () => {
       </section>
 
       {/* Footer */}
-      <footer className="relative py-20 text-center overflow-hidden">
+      <footer className="relative py-12 sm:py-16 md:py-20 text-center overflow-hidden px-4">
         {/* Background Image */}
         <div 
           className="absolute inset-0 bg-cover bg-center"
@@ -61,15 +61,15 @@ const Index = () => {
           }}
         />
         {/* Dark Overlay */}
-        <div className="absolute inset-0 bg-black/75" />
+        <div className="absolute inset-0 bg-black/70" />
         
         {/* Content */}
         <div className="relative z-10">
-          <p className="text-muted-foreground text-lg tracking-wider mb-3">
+          <p className="text-muted-foreground text-sm sm:text-base md:text-lg tracking-wider mb-2 sm:mb-3">
             Discover the pearl of the Deccan
           </p>
           <p 
-            className="font-serif text-3xl mb-10"
+            className="font-serif text-xl sm:text-2xl md:text-3xl mb-6 sm:mb-8 md:mb-10"
             style={{
               color: "hsl(50 100% 55%)",
               textShadow: "0 0 20px hsl(50 100% 55% / 0.4)",
@@ -85,8 +85,8 @@ const Index = () => {
               borderTop: "1px solid hsla(0, 0%, 100%, 0.1)",
             }}
           >
-            <span className="text-lg tracking-wide">
-              Made by <span className="text-white font-semibold text-2xl">Tarun Tej Gajibimkar</span>
+            <span className="text-base text-muted-foreground tracking-wide">
+              Made by Tarun Tej Gajibimkar
             </span>
             <a
               href="https://www.linkedin.com/in/tarun-tej-gajibimkar/"
