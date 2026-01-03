@@ -52,12 +52,14 @@ const Index = () => {
       </section>
 
       {/* Footer */}
-      <footer className="relative py-12 sm:py-16 md:py-20 text-center overflow-hidden px-4">
+      <footer className="relative py-12 sm:py-16 md:py-20 text-center overflow-hidden px-4 sm:px-6">
         {/* Background Image */}
         <div 
-          className="absolute inset-0 bg-cover bg-center"
+          className="absolute inset-0"
           style={{
             backgroundImage: `url(${footerBg})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
           }}
         />
         {/* Dark Overlay */}
@@ -85,7 +87,14 @@ const Index = () => {
               borderTop: "1px solid hsla(0, 0%, 100%, 0.1)",
             }}
           >
-            <span className="text-base text-muted-foreground tracking-wide">
+            <span 
+              className="text-lg sm:text-xl md:text-2xl tracking-wide"
+              style={{
+                fontFamily: "Inter, system-ui, sans-serif",
+                fontWeight: 400,
+                color: "hsl(0 0% 85%)",
+              }}
+            >
               Made by Tarun Tej Gajibimkar
             </span>
             <a

@@ -4,7 +4,7 @@ import buddhaStatue from "@/assets/buddha-statue-night.jpg";
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-4 sm:px-6">
       {/* Background Image - Buddha Statue at Hussain Sagar */}
       <div 
         className="absolute inset-0"
@@ -67,7 +67,11 @@ const HeroSection = () => {
         transition={{ duration: 1, ease: "easeOut" }}
       >
         <motion.h1
-          className="font-serif text-4xl sm:text-5xl md:text-7xl lg:text-9xl font-bold mb-4 md:mb-6"
+          className="font-serif font-bold mb-3 sm:mb-4 md:mb-6"
+          style={{
+            fontSize: "clamp(2.5rem, 10vw, 9rem)",
+            lineHeight: 1.1,
+          }}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.8 }}
@@ -113,7 +117,10 @@ const HeroSection = () => {
         </motion.h1>
 
         <motion.p
-          className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-4 font-sans font-light tracking-wide"
+          className="text-muted-foreground max-w-2xl mx-auto mb-3 sm:mb-4 font-sans font-light tracking-wide"
+          style={{
+            fontSize: "clamp(0.875rem, 2.5vw, 1.25rem)",
+          }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.1, duration: 0.8 }}
@@ -123,8 +130,9 @@ const HeroSection = () => {
 
         {/* Sub-tagline with warm glow */}
         <motion.p
-          className="text-base md:text-lg font-serif italic mb-10"
+          className="font-serif italic mb-8 sm:mb-10"
           style={{
+            fontSize: "clamp(1rem, 3vw, 1.25rem)",
             color: "hsl(35, 100%, 65%)",
             textShadow: `
               0 0 8px hsl(35 100% 50% / 0.5),

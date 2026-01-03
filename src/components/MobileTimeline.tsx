@@ -8,13 +8,13 @@ interface MobileTimelineProps {
 
 const MobileTimeline = ({ onNodeClick, activeSection }: MobileTimelineProps) => {
   return (
-    <div className="relative py-12 px-3 sm:py-16 sm:px-4 overflow-x-hidden">
-      {/* Glowing timeline line */}
+    <div className="relative py-12 px-4 sm:px-6 overflow-x-hidden">
+      {/* Glowing timeline line - reduced glow intensity on mobile */}
       <div 
-        className="absolute left-8 top-0 bottom-0 w-1 rounded-full"
+        className="absolute left-6 sm:left-8 top-0 bottom-0 w-0.5 sm:w-1 rounded-full"
         style={{
           background: "linear-gradient(to bottom, hsl(45 90% 53%), hsl(195 100% 50%), hsl(45 90% 53%))",
-          boxShadow: "0 0 20px hsl(45 90% 53% / 0.5), 0 0 40px hsl(195 100% 50% / 0.3)",
+          boxShadow: "0 0 12px hsl(45 90% 53% / 0.4), 0 0 24px hsl(195 100% 50% / 0.2)",
         }}
       />
 
@@ -23,17 +23,17 @@ const MobileTimeline = ({ onNodeClick, activeSection }: MobileTimelineProps) => 
           const isSelected = activeSection === section.id;
 
           return (
-            <motion.div
+          <motion.div
               key={section.id}
-              className="relative pl-20"
-              initial={{ opacity: 0, x: -30 }}
+              className="relative pl-16 sm:pl-20"
+              initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ delay: index * 0.1 }}
             >
               {/* Glowing node */}
               <motion.div
-                className="absolute left-4 top-4 w-10 h-10 rounded-full flex items-center justify-center cursor-pointer"
+                className="absolute left-2 sm:left-4 top-4 w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center cursor-pointer"
                 style={{
                   background: isSelected 
                     ? section.accentColor 
@@ -46,7 +46,7 @@ const MobileTimeline = ({ onNodeClick, activeSection }: MobileTimelineProps) => 
                 whileTap={{ scale: 0.9 }}
                 onClick={() => onNodeClick(section.id)}
               >
-                <span className="text-lg">{section.icon}</span>
+                <span className="text-base sm:text-lg">{section.icon}</span>
               </motion.div>
 
               {/* Glassmorphic content card */}
@@ -67,11 +67,11 @@ const MobileTimeline = ({ onNodeClick, activeSection }: MobileTimelineProps) => 
                 onClick={() => onNodeClick(section.id)}
               >
                 {/* Image */}
-                <div className="relative h-40 overflow-hidden">
+                <div className="relative h-36 sm:h-40 overflow-hidden">
                   <img
                     src={section.image}
                     alt={section.title}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover object-center"
                   />
                   <div 
                     className="absolute inset-0"
