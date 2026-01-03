@@ -81,7 +81,7 @@ const GlowRoad = ({ onCardClick, activeSection }: GlowRoadProps) => {
   ];
 
   return (
-    <div ref={containerRef} className="relative w-full py-12 sm:py-16 md:py-32 overflow-x-hidden px-4 sm:px-6">
+    <div ref={containerRef} className="relative w-full pt-0 pb-12 sm:pb-16 md:pb-32 overflow-x-hidden px-4 sm:px-6">
       {/* Ambient background glow that follows scroll - reduced on mobile */}
       <motion.div
         className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] sm:w-[600px] md:w-[800px] h-[400px] sm:h-[600px] md:h-[800px] rounded-full pointer-events-none z-0"

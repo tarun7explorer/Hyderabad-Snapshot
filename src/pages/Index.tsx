@@ -34,143 +34,153 @@ const Index = () => {
 
   return (
     <main className="min-h-screen" style={{ background: "hsl(0 0% 2%)" }}>
-      {/* Hero Section - overflow visible for seamless connection */}
-      <div className="relative" style={{ overflow: "visible" }}>
+      {/* Hero Section - no margin/padding at bottom */}
+      <div className="relative" style={{ marginBottom: 0, paddingBottom: 0 }}>
         <HeroSection />
       </div>
 
-      {/* Unified Anchor Component - Begin Journey + Bridge + Path Connection */}
+      {/* Black Section Container - zero gap from hero */}
       <div 
-        className="relative z-30 flex flex-col items-center"
-        style={{ marginTop: "-60px" }}
+        className="relative"
+        style={{ 
+          background: "hsl(0 0% 2%)",
+          marginTop: 0,
+          paddingTop: 0,
+        }}
       >
-        {/* Begin Journey Button */}
-        <motion.button
-          className="flex flex-col items-center gap-2 sm:gap-3 cursor-pointer group relative z-10"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.9, duration: 0.8 }}
-          onClick={() => window.scrollTo({ top: window.innerHeight, behavior: "smooth" })}
+        {/* Unified Journey Component - Begin Journey + Bridge + Path Start */}
+        <div 
+          className="relative z-30 flex flex-col items-center"
+          style={{ 
+            marginTop: "-80px",
+            position: "relative",
+          }}
         >
-          <span 
-            className="text-sm sm:text-base tracking-[0.2em] uppercase font-semibold"
-            style={{
-              color: "hsl(50 100% 60%)",
-              textShadow: `
-                0 0 5px hsl(50 100% 70% / 1),
-                0 0 10px hsl(50 100% 60% / 1),
-                0 0 20px hsl(50 100% 55% / 0.9),
-                0 0 40px hsl(50 100% 50% / 0.8),
-                0 0 80px hsl(50 100% 50% / 0.6),
-                0 0 120px hsl(50 100% 50% / 0.4)
-              `,
-            }}
+          {/* Begin Journey Button */}
+          <motion.button
+            className="flex flex-col items-center gap-2 sm:gap-3 cursor-pointer group relative z-10"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.9, duration: 0.8 }}
+            onClick={() => window.scrollTo({ top: window.innerHeight, behavior: "smooth" })}
           >
-            Begin Journey
-          </span>
-          <motion.div
-            className="p-3 rounded-full relative"
-            style={{
-              background: "hsla(50, 100%, 55%, 0.15)",
-              border: "2px solid hsl(50, 100%, 55%)",
-              boxShadow: `
-                0 0 15px hsl(50 100% 55% / 0.9),
-                0 0 30px hsl(50 100% 55% / 0.6),
-                0 0 50px hsl(50 100% 55% / 0.4),
-                0 0 80px hsl(50 100% 55% / 0.3),
-                inset 0 0 15px hsl(50 100% 55% / 0.3)
-              `,
-            }}
-            animate={{ 
-              y: [0, 8, 0],
-              boxShadow: [
-                `0 0 15px hsl(50 100% 55% / 0.9), 0 0 30px hsl(50 100% 55% / 0.6), 0 0 50px hsl(50 100% 55% / 0.4), 0 0 80px hsl(50 100% 55% / 0.3), inset 0 0 15px hsl(50 100% 55% / 0.3)`,
-                `0 0 20px hsl(50 100% 55% / 1), 0 0 40px hsl(50 100% 55% / 0.8), 0 0 70px hsl(50 100% 55% / 0.5), 0 0 100px hsl(50 100% 55% / 0.4), inset 0 0 20px hsl(50 100% 55% / 0.4)`,
-                `0 0 15px hsl(50 100% 55% / 0.9), 0 0 30px hsl(50 100% 55% / 0.6), 0 0 50px hsl(50 100% 55% / 0.4), 0 0 80px hsl(50 100% 55% / 0.3), inset 0 0 15px hsl(50 100% 55% / 0.3)`,
-              ]
-            }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            whileHover={{ scale: 1.1 }}
-          >
-            {/* Pulse ring animation */}
-            <motion.div
-              className="absolute inset-0 rounded-full"
+            <span 
+              className="text-sm sm:text-base tracking-[0.2em] uppercase font-semibold"
               style={{
+                color: "hsl(50 100% 60%)",
+                textShadow: `
+                  0 0 5px hsl(50 100% 70% / 1),
+                  0 0 10px hsl(50 100% 60% / 1),
+                  0 0 20px hsl(50 100% 55% / 0.9),
+                  0 0 40px hsl(50 100% 50% / 0.8),
+                  0 0 80px hsl(50 100% 50% / 0.6),
+                  0 0 120px hsl(50 100% 50% / 0.4)
+                `,
+              }}
+            >
+              Begin Journey
+            </span>
+            <motion.div
+              className="p-3 rounded-full relative"
+              style={{
+                background: "hsla(50, 100%, 55%, 0.15)",
                 border: "2px solid hsl(50, 100%, 55%)",
+                boxShadow: `
+                  0 0 15px hsl(50 100% 55% / 0.9),
+                  0 0 30px hsl(50 100% 55% / 0.6),
+                  0 0 50px hsl(50 100% 55% / 0.4),
+                  0 0 80px hsl(50 100% 55% / 0.3),
+                  inset 0 0 15px hsl(50 100% 55% / 0.3)
+                `,
+              }}
+              animate={{ 
+                y: [0, 8, 0],
+                boxShadow: [
+                  `0 0 15px hsl(50 100% 55% / 0.9), 0 0 30px hsl(50 100% 55% / 0.6), 0 0 50px hsl(50 100% 55% / 0.4), 0 0 80px hsl(50 100% 55% / 0.3), inset 0 0 15px hsl(50 100% 55% / 0.3)`,
+                  `0 0 20px hsl(50 100% 55% / 1), 0 0 40px hsl(50 100% 55% / 0.8), 0 0 70px hsl(50 100% 55% / 0.5), 0 0 100px hsl(50 100% 55% / 0.4), inset 0 0 20px hsl(50 100% 55% / 0.4)`,
+                  `0 0 15px hsl(50 100% 55% / 0.9), 0 0 30px hsl(50 100% 55% / 0.6), 0 0 50px hsl(50 100% 55% / 0.4), 0 0 80px hsl(50 100% 55% / 0.3), inset 0 0 15px hsl(50 100% 55% / 0.3)`,
+                ]
+              }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              whileHover={{ scale: 1.1 }}
+            >
+              {/* Pulse ring animation */}
+              <motion.div
+                className="absolute inset-0 rounded-full"
+                style={{
+                  border: "2px solid hsl(50, 100%, 55%)",
+                }}
+                animate={{
+                  scale: [1, 1.8, 2],
+                  opacity: [0.6, 0.3, 0],
+                }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: "easeOut" }}
+              />
+              <ChevronDown 
+                className="w-6 h-6 relative z-10" 
+                style={{ 
+                  color: "hsl(50 100% 60%)",
+                  filter: "drop-shadow(0 0 8px hsl(50 100% 55%))",
+                }}
+              />
+            </motion.div>
+          </motion.button>
+          
+          {/* Physical Bridge Line - NO GAP, starts inside arrow, merges with path */}
+          <motion.div
+            className="w-2 relative"
+            style={{
+              height: "200px",
+              marginTop: "-16px",
+              background: "linear-gradient(to bottom, hsl(50 100% 55%) 0%, hsl(45 100% 52%) 15%, hsl(35 100% 50%) 40%, hsl(25 100% 50%) 100%)",
+              borderRadius: "4px",
+              boxShadow: `
+                0 0 15px hsl(25 100% 50% / 1),
+                0 0 30px hsl(25 100% 50% / 0.9),
+                0 0 60px hsl(25 100% 50% / 0.6),
+                0 0 100px hsl(25 100% 50% / 0.4),
+                0 0 150px hsl(25 100% 50% / 0.25)
+              `,
+            }}
+            initial={{ scaleY: 0, originY: 0 }}
+            animate={{ scaleY: 1 }}
+            transition={{ delay: 2.2, duration: 0.8, ease: "easeOut" }}
+          >
+            {/* Flowing energy pulse inside bridge */}
+            <motion.div
+              className="absolute left-0 right-0 h-10 rounded-full"
+              style={{
+                background: "linear-gradient(to bottom, transparent, hsl(50 100% 70% / 0.9), transparent)",
               }}
               animate={{
-                scale: [1, 1.8, 2],
-                opacity: [0.6, 0.3, 0],
+                top: ["-40px", "200px"],
               }}
-              transition={{ duration: 1.5, repeat: Infinity, ease: "easeOut" }}
-            />
-            <ChevronDown 
-              className="w-6 h-6 relative z-10" 
-              style={{ 
-                color: "hsl(50 100% 60%)",
-                filter: "drop-shadow(0 0 8px hsl(50 100% 55%))",
+              transition={{
+                duration: 1.2,
+                repeat: Infinity,
+                ease: "linear",
+                delay: 3,
               }}
             />
           </motion.div>
-        </motion.button>
-        
-        {/* Physical Bridge Line - starts inside arrow circle, extends to path */}
-        <motion.div
-          className="w-1.5 rounded-full relative"
-          style={{
-            height: "180px",
-            marginTop: "-12px",
-            background: "linear-gradient(to bottom, hsl(50 100% 55%) 0%, hsl(40 100% 52%) 20%, hsl(25 100% 50%) 100%)",
-            boxShadow: `
-              0 0 12px hsl(25 100% 50% / 1),
-              0 0 25px hsl(25 100% 50% / 0.9),
-              0 0 50px hsl(25 100% 50% / 0.6),
-              0 0 80px hsl(25 100% 50% / 0.4),
-              0 0 120px hsl(25 100% 50% / 0.2)
-            `,
-          }}
-          initial={{ scaleY: 0, originY: 0 }}
-          animate={{ 
-            scaleY: 1,
-          }}
-          transition={{ 
-            scaleY: { delay: 2.2, duration: 0.8, ease: "easeOut" },
-          }}
-        >
-          {/* Flowing energy pulse inside bridge */}
-          <motion.div
-            className="absolute left-0 right-0 h-8 rounded-full"
-            style={{
-              background: "linear-gradient(to bottom, transparent, hsl(50 100% 70% / 0.8), transparent)",
-            }}
-            animate={{
-              top: ["-32px", "180px"],
-            }}
-            transition={{
-              duration: 1.5,
-              repeat: Infinity,
-              ease: "linear",
-              delay: 3,
-            }}
+        </div>
+
+        {/* Glow Road - Desktop (zero margin, connects directly to bridge) */}
+        <section className="hidden md:block" style={{ marginTop: "-8px" }}>
+          <GlowRoad
+            onCardClick={handleCardClick}
+            activeSection={selectedSection?.id || null}
           />
-        </motion.div>
+        </section>
+
+        {/* Mobile Timeline */}
+        <section className="md:hidden" style={{ marginTop: "-8px" }}>
+          <MobileTimeline
+            onNodeClick={handleCardClick}
+            activeSection={selectedSection?.id || null}
+          />
+        </section>
       </div>
-
-      {/* Glow Road - Desktop (positioned to connect with bridge) */}
-      <section className="hidden md:block" style={{ marginTop: "-2px" }}>
-        <GlowRoad
-          onCardClick={handleCardClick}
-          activeSection={selectedSection?.id || null}
-        />
-      </section>
-
-      {/* Mobile Timeline */}
-      <section className="md:hidden" style={{ marginTop: "-2px" }}>
-        <MobileTimeline
-          onNodeClick={handleCardClick}
-          activeSection={selectedSection?.id || null}
-        />
-      </section>
 
       {/* Footer */}
       <footer className="relative min-h-[50vh] sm:min-h-[60vh] flex items-end justify-center text-center overflow-hidden px-4 sm:px-6 pb-10 sm:pb-14">
