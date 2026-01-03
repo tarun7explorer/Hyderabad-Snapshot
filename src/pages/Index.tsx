@@ -180,6 +180,119 @@ const Index = () => {
             activeSection={selectedSection?.id || null}
           />
         </section>
+
+        {/* Final Destination Flashcard */}
+        <div className="relative z-20 flex flex-col items-center pb-16 sm:pb-24">
+          {/* Connection line from path to flashcard */}
+          <motion.div
+            className="w-1.5 relative"
+            style={{
+              height: "80px",
+              background: "linear-gradient(to bottom, hsl(330 100% 60%) 0%, hsl(330 100% 55%) 100%)",
+              borderRadius: "4px",
+              boxShadow: `
+                0 0 15px hsl(330 100% 60% / 1),
+                0 0 30px hsl(330 100% 55% / 0.8),
+                0 0 50px hsl(330 100% 50% / 0.5)
+              `,
+            }}
+            initial={{ scaleY: 0, originY: 0 }}
+            whileInView={{ scaleY: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          />
+          
+          {/* Pulsing node at connection point */}
+          <motion.div
+            className="relative z-10"
+            style={{ marginTop: "-8px" }}
+          >
+            <motion.div
+              className="w-4 h-4 rounded-full"
+              style={{
+                background: "hsl(330 100% 60%)",
+                boxShadow: `
+                  0 0 15px hsl(330 100% 60% / 1),
+                  0 0 30px hsl(330 100% 55% / 0.8),
+                  0 0 50px hsl(330 100% 50% / 0.5)
+                `,
+              }}
+              animate={{
+                scale: [1, 1.3, 1],
+                boxShadow: [
+                  `0 0 15px hsl(330 100% 60% / 1), 0 0 30px hsl(330 100% 55% / 0.8), 0 0 50px hsl(330 100% 50% / 0.5)`,
+                  `0 0 25px hsl(330 100% 60% / 1), 0 0 50px hsl(330 100% 55% / 0.9), 0 0 80px hsl(330 100% 50% / 0.6)`,
+                  `0 0 15px hsl(330 100% 60% / 1), 0 0 30px hsl(330 100% 55% / 0.8), 0 0 50px hsl(330 100% 50% / 0.5)`,
+                ],
+              }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            />
+            {/* Outer pulse ring */}
+            <motion.div
+              className="absolute inset-0 rounded-full"
+              style={{ border: "2px solid hsl(330 100% 60%)" }}
+              animate={{ scale: [1, 2.5], opacity: [0.8, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity, ease: "easeOut" }}
+            />
+          </motion.div>
+
+          {/* Glassmorphism Flashcard */}
+          <motion.div
+            className="relative mx-4 sm:mx-8 mt-6 max-w-xl w-full"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
+            <div
+              className="relative px-6 py-8 sm:px-10 sm:py-12 rounded-2xl text-center overflow-hidden"
+              style={{
+                background: "hsla(0, 0%, 8%, 0.7)",
+                backdropFilter: "blur(20px)",
+                WebkitBackdropFilter: "blur(20px)",
+                border: "1px solid hsl(330 100% 55% / 0.5)",
+                boxShadow: `
+                  0 0 30px hsl(330 100% 55% / 0.3),
+                  0 0 60px hsl(330 100% 50% / 0.15),
+                  inset 0 0 30px hsl(330 100% 55% / 0.05)
+                `,
+              }}
+            >
+              {/* Subtle inner glow gradient */}
+              <div
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                  background: "radial-gradient(ellipse at center, hsl(330 100% 60% / 0.08) 0%, transparent 70%)",
+                }}
+              />
+              
+              {/* Content */}
+              <div className="relative z-10">
+                <p
+                  className="text-base sm:text-lg md:text-xl mb-4 sm:mb-6 font-light tracking-wide"
+                  style={{
+                    color: "hsl(0, 0%, 95%)",
+                    textShadow: "0 0 20px hsla(0, 0%, 100%, 0.2)",
+                  }}
+                >
+                  Many things are yet to be explored in Hyderabad.
+                </p>
+                <p
+                  className="text-xl sm:text-2xl md:text-3xl font-serif italic"
+                  style={{
+                    color: "hsl(0, 0%, 100%)",
+                    textShadow: `
+                      0 0 20px hsla(330, 100%, 70%, 0.4),
+                      0 0 40px hsla(330, 100%, 60%, 0.2)
+                    `,
+                  }}
+                >
+                  "Hyderabad is an emotion."
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
       </div>
 
       {/* Footer */}
