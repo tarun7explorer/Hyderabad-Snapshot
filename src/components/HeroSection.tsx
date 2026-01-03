@@ -173,49 +173,93 @@ const HeroSection = () => {
         </motion.p>
       </motion.div>
 
-      {/* Begin Journey Button - positioned fully in black section below hero */}
-      <motion.button
-        className="absolute -bottom-16 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 cursor-pointer group"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.9, duration: 0.8 }}
-        onClick={() => window.scrollTo({ top: window.innerHeight, behavior: "smooth" })}
+      {/* Begin Journey Button - anchored at absolute top of black section, flush with hero bottom */}
+      <div 
+        className="absolute left-1/2 -translate-x-1/2 z-20"
+        style={{ bottom: "-80px" }}
       >
-        <span 
-          className="text-sm sm:text-base tracking-[0.2em] uppercase font-semibold"
-          style={{
-            color: "hsl(50 100% 60%)",
-            textShadow: "0 0 10px hsl(50 100% 55% / 0.8), 0 0 20px hsl(50 100% 50% / 0.5)",
-          }}
+        <motion.button
+          className="flex flex-col items-center gap-3 cursor-pointer group"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.9, duration: 0.8 }}
+          onClick={() => window.scrollTo({ top: window.innerHeight, behavior: "smooth" })}
         >
-          Begin Journey
-        </span>
-        <motion.div
-          className="p-3 rounded-full"
-          style={{
-            background: "hsla(50, 100%, 55%, 0.15)",
-            border: "2px solid hsl(50, 100%, 55%)",
-            boxShadow: `
-              0 0 15px hsl(50 100% 55% / 0.9),
-              0 0 30px hsl(50 100% 55% / 0.6),
-              0 0 50px hsl(50 100% 55% / 0.4),
-              0 0 80px hsl(50 100% 55% / 0.3),
-              inset 0 0 15px hsl(50 100% 55% / 0.3)
-            `,
-          }}
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity }}
-          whileHover={{ scale: 1.1 }}
-        >
-          <ChevronDown 
-            className="w-6 h-6" 
-            style={{ 
+          <span 
+            className="text-sm sm:text-base tracking-[0.2em] uppercase font-semibold"
+            style={{
               color: "hsl(50 100% 60%)",
-              filter: "drop-shadow(0 0 5px hsl(50 100% 55%))",
+              textShadow: `
+                0 0 5px hsl(50 100% 70% / 1),
+                0 0 10px hsl(50 100% 60% / 1),
+                0 0 20px hsl(50 100% 55% / 0.9),
+                0 0 40px hsl(50 100% 50% / 0.8),
+                0 0 80px hsl(50 100% 50% / 0.5)
+              `,
             }}
+          >
+            Begin Journey
+          </span>
+          <motion.div
+            className="p-3 rounded-full relative"
+            style={{
+              background: "hsla(50, 100%, 55%, 0.15)",
+              border: "2px solid hsl(50, 100%, 55%)",
+              boxShadow: `
+                0 0 15px hsl(50 100% 55% / 0.9),
+                0 0 30px hsl(50 100% 55% / 0.6),
+                0 0 50px hsl(50 100% 55% / 0.4),
+                0 0 80px hsl(50 100% 55% / 0.3),
+                inset 0 0 15px hsl(50 100% 55% / 0.3)
+              `,
+            }}
+            animate={{ 
+              y: [0, 8, 0],
+              boxShadow: [
+                `0 0 15px hsl(50 100% 55% / 0.9), 0 0 30px hsl(50 100% 55% / 0.6), 0 0 50px hsl(50 100% 55% / 0.4), 0 0 80px hsl(50 100% 55% / 0.3), inset 0 0 15px hsl(50 100% 55% / 0.3)`,
+                `0 0 20px hsl(50 100% 55% / 1), 0 0 40px hsl(50 100% 55% / 0.8), 0 0 70px hsl(50 100% 55% / 0.5), 0 0 100px hsl(50 100% 55% / 0.4), inset 0 0 20px hsl(50 100% 55% / 0.4)`,
+                `0 0 15px hsl(50 100% 55% / 0.9), 0 0 30px hsl(50 100% 55% / 0.6), 0 0 50px hsl(50 100% 55% / 0.4), 0 0 80px hsl(50 100% 55% / 0.3), inset 0 0 15px hsl(50 100% 55% / 0.3)`,
+              ]
+            }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            whileHover={{ scale: 1.1 }}
+          >
+            {/* Pulse ring animation */}
+            <motion.div
+              className="absolute inset-0 rounded-full"
+              style={{
+                border: "2px solid hsl(50, 100%, 55%)",
+              }}
+              animate={{
+                scale: [1, 1.8, 2],
+                opacity: [0.6, 0.3, 0],
+              }}
+              transition={{ duration: 1.5, repeat: Infinity, ease: "easeOut" }}
+            />
+            <ChevronDown 
+              className="w-6 h-6 relative z-10" 
+              style={{ 
+                color: "hsl(50 100% 60%)",
+                filter: "drop-shadow(0 0 8px hsl(50 100% 55%))",
+              }}
+            />
+          </motion.div>
+          
+          {/* Connecting glow line to path */}
+          <motion.div
+            className="w-0.5 h-8"
+            style={{
+              background: "linear-gradient(to bottom, hsl(50 100% 55%), hsl(45 90% 53%))",
+              boxShadow: "0 0 10px hsl(50 100% 55% / 0.8), 0 0 20px hsl(50 100% 55% / 0.5)",
+            }}
+            animate={{
+              opacity: [0.6, 1, 0.6],
+              scaleY: [0.9, 1.1, 0.9],
+            }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           />
-        </motion.div>
-      </motion.button>
+        </motion.button>
+      </div>
     </section>
   );
 };
