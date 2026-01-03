@@ -25,6 +25,13 @@ export default {
         foreground: "hsl(var(--foreground))",
         "nizam-gold": "hsl(var(--nizam-gold))",
         "cyber-blue": "hsl(var(--cyber-blue))",
+        "glow-food": "hsl(var(--glow-food))",
+        "glow-culture": "hsl(var(--glow-culture))",
+        "glow-places": "hsl(var(--glow-places))",
+        "glow-it": "hsl(var(--glow-it))",
+        "glow-infrastructure": "hsl(var(--glow-infrastructure))",
+        "glow-adventure": "hsl(var(--glow-adventure))",
+        "glow-malls": "hsl(var(--glow-malls))",
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
