@@ -34,12 +34,12 @@ const Index = () => {
 
   return (
     <main className="min-h-screen" style={{ background: "hsl(0 0% 2%)" }}>
-      {/* Hero Section - no margin/padding at bottom */}
+      {/* Hero Section - flush with black section */}
       <div className="relative" style={{ marginBottom: 0, paddingBottom: 0 }}>
         <HeroSection />
       </div>
 
-      {/* Black Section Container - zero gap from hero */}
+      {/* Black Section Container - physically merged with hero */}
       <div 
         className="relative"
         style={{ 
@@ -48,13 +48,10 @@ const Index = () => {
           paddingTop: 0,
         }}
       >
-        {/* Unified Journey Component - Begin Journey + Bridge + Path Start */}
+        {/* Begin Journey - Entirely inside black section with zero gap */}
         <div 
-          className="relative z-30 flex flex-col items-center"
-          style={{ 
-            marginTop: "-80px",
-            position: "relative",
-          }}
+          className="relative z-30 flex flex-col items-center pt-8 sm:pt-12"
+          style={{ margin: 0 }}
         >
           {/* Begin Journey Button */}
           <motion.button
@@ -107,13 +104,8 @@ const Index = () => {
               {/* Pulse ring animation */}
               <motion.div
                 className="absolute inset-0 rounded-full"
-                style={{
-                  border: "2px solid hsl(50, 100%, 55%)",
-                }}
-                animate={{
-                  scale: [1, 1.8, 2],
-                  opacity: [0.6, 0.3, 0],
-                }}
+                style={{ border: "2px solid hsl(50, 100%, 55%)" }}
+                animate={{ scale: [1, 1.8, 2], opacity: [0.6, 0.3, 0] }}
                 transition={{ duration: 1.5, repeat: Infinity, ease: "easeOut" }}
               />
               <ChevronDown 
@@ -126,12 +118,13 @@ const Index = () => {
             </motion.div>
           </motion.button>
           
-          {/* Physical Bridge Line - NO GAP, starts inside arrow, merges with path */}
+          {/* Physical Bridge Line - ZERO gap, overlaps arrow and path */}
           <motion.div
             className="w-2 relative"
             style={{
-              height: "200px",
-              marginTop: "-16px",
+              height: "180px",
+              marginTop: "-14px",
+              marginBottom: "-6px",
               background: "linear-gradient(to bottom, hsl(50 100% 55%) 0%, hsl(45 100% 52%) 15%, hsl(35 100% 50%) 40%, hsl(25 100% 50%) 100%)",
               borderRadius: "4px",
               boxShadow: `
@@ -146,21 +139,12 @@ const Index = () => {
             animate={{ scaleY: 1 }}
             transition={{ delay: 2.2, duration: 0.8, ease: "easeOut" }}
           >
-            {/* Flowing energy pulse inside bridge */}
+            {/* Flowing energy pulse */}
             <motion.div
               className="absolute left-0 right-0 h-10 rounded-full"
-              style={{
-                background: "linear-gradient(to bottom, transparent, hsl(50 100% 70% / 0.9), transparent)",
-              }}
-              animate={{
-                top: ["-40px", "200px"],
-              }}
-              transition={{
-                duration: 1.2,
-                repeat: Infinity,
-                ease: "linear",
-                delay: 3,
-              }}
+              style={{ background: "linear-gradient(to bottom, transparent, hsl(50 100% 70% / 0.9), transparent)" }}
+              animate={{ top: ["-40px", "180px"] }}
+              transition={{ duration: 1.2, repeat: Infinity, ease: "linear", delay: 3 }}
             />
           </motion.div>
         </div>
@@ -181,18 +165,15 @@ const Index = () => {
           />
         </section>
 
-        {/* Final Destination - Unified Path + Flashcard Container (ZERO GAP, Physical Merger) */}
-        <div 
-          className="relative z-20 flex flex-col items-center pb-16 sm:pb-24"
-          style={{ gap: 0, margin: 0, padding: 0 }}
-        >
-          {/* Unified Path-to-Card Connection Wrapper */}
-          <div className="relative flex flex-col items-center" style={{ margin: 0, padding: 0 }}>
-            {/* Pink path line - extends INTO the terminal node */}
+        {/* Final Destination - Physical Path-to-Flashcard Merger */}
+        <div className="relative z-20 flex flex-col items-center pb-16 sm:pb-24">
+          {/* Unified vertical stack with zero gap */}
+          <div className="relative flex flex-col items-center" style={{ gap: 0 }}>
+            {/* Pink path line - terminates inside terminal node */}
             <div
-              className="w-1.5"
+              className="w-1.5 relative"
               style={{
-                height: "100px",
+                height: "120px",
                 background: "linear-gradient(to bottom, hsl(330 100% 60%) 0%, hsl(330 100% 55%) 100%)",
                 borderRadius: "4px 4px 0 0",
                 boxShadow: `
@@ -201,44 +182,40 @@ const Index = () => {
                   0 0 50px hsl(330 100% 50% / 0.5),
                   0 0 80px hsl(330 100% 50% / 0.3)
                 `,
-                marginBottom: "-12px", /* Extends INTO the terminal node */
                 zIndex: 30,
               }}
-            />
+            >
+              {/* Energy flow inside line */}
+              <motion.div
+                className="absolute left-0 right-0 w-full h-8 rounded-full"
+                style={{ background: "linear-gradient(to bottom, transparent, hsl(330 100% 80% / 0.9), transparent)" }}
+                animate={{ top: ["-32px", "120px"] }}
+                transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+              />
+            </div>
             
-            {/* Energy flow animation in the line */}
+            {/* Terminal Node - flush on flashcard top border */}
             <motion.div
-              className="absolute left-1/2 -translate-x-1/2 w-1.5 h-8 rounded-full pointer-events-none"
-              style={{
-                background: "linear-gradient(to bottom, transparent, hsl(330 100% 80% / 0.9), transparent)",
-                zIndex: 31,
-              }}
-              animate={{ top: ["-32px", "88px"] }}
-              transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-            />
-            
-            {/* Terminal Node - Exact center of flashcard top border */}
-            <motion.div
-              className="relative z-40 flex items-center justify-center"
-              style={{ marginBottom: "-12px" }} /* Node overlaps INTO flashcard border */
+              className="relative z-50 flex items-center justify-center"
+              style={{ marginTop: "-14px", marginBottom: "-14px" }}
             >
               <motion.div
-                className="w-6 h-6 rounded-full"
+                className="w-7 h-7 rounded-full"
                 style={{
                   background: "radial-gradient(circle at 30% 30%, hsl(330 100% 80%), hsl(330 100% 55%))",
                   boxShadow: `
-                    0 0 15px hsl(330 100% 60% / 1),
-                    0 0 30px hsl(330 100% 55% / 1),
-                    0 0 50px hsl(330 100% 50% / 0.7),
-                    0 0 80px hsl(330 100% 50% / 0.5)
+                    0 0 20px hsl(330 100% 60% / 1),
+                    0 0 40px hsl(330 100% 55% / 1),
+                    0 0 60px hsl(330 100% 50% / 0.7),
+                    0 0 100px hsl(330 100% 50% / 0.5)
                   `,
                 }}
                 animate={{
-                  scale: [1, 1.2, 1],
+                  scale: [1, 1.15, 1],
                   boxShadow: [
-                    `0 0 15px hsl(330 100% 60% / 1), 0 0 30px hsl(330 100% 55% / 1), 0 0 50px hsl(330 100% 50% / 0.7), 0 0 80px hsl(330 100% 50% / 0.5)`,
-                    `0 0 25px hsl(330 100% 60% / 1), 0 0 50px hsl(330 100% 55% / 1), 0 0 80px hsl(330 100% 50% / 0.9), 0 0 120px hsl(330 100% 50% / 0.6)`,
-                    `0 0 15px hsl(330 100% 60% / 1), 0 0 30px hsl(330 100% 55% / 1), 0 0 50px hsl(330 100% 50% / 0.7), 0 0 80px hsl(330 100% 50% / 0.5)`,
+                    `0 0 20px hsl(330 100% 60% / 1), 0 0 40px hsl(330 100% 55% / 1), 0 0 60px hsl(330 100% 50% / 0.7), 0 0 100px hsl(330 100% 50% / 0.5)`,
+                    `0 0 30px hsl(330 100% 60% / 1), 0 0 60px hsl(330 100% 55% / 1), 0 0 100px hsl(330 100% 50% / 0.9), 0 0 140px hsl(330 100% 50% / 0.6)`,
+                    `0 0 20px hsl(330 100% 60% / 1), 0 0 40px hsl(330 100% 55% / 1), 0 0 60px hsl(330 100% 50% / 0.7), 0 0 100px hsl(330 100% 50% / 0.5)`,
                   ],
                 }}
                 transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
@@ -252,9 +229,9 @@ const Index = () => {
               />
             </motion.div>
             
-            {/* Glassmorphism Flashcard - shares same vertical space with node */}
+            {/* Premium Glassmorphism Flashcard */}
             <motion.div
-              className="relative mx-4 sm:mx-8 max-w-xl w-full flex flex-col items-center"
+              className="relative mx-4 sm:mx-8 max-w-xl w-full"
               style={{ zIndex: 20 }}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -262,69 +239,82 @@ const Index = () => {
               transition={{ duration: 0.8, delay: 0.3 }}
             >
               <div
-                className="relative w-full px-6 py-10 sm:px-10 sm:py-14 rounded-2xl text-center overflow-hidden"
+                className="relative w-full px-8 py-12 sm:px-12 sm:py-16 rounded-2xl text-center overflow-hidden"
                 style={{
-                  background: "hsla(0, 0%, 8%, 0.75)",
-                  backdropFilter: "blur(20px)",
-                  WebkitBackdropFilter: "blur(20px)",
-                  border: "2px solid hsl(330 100% 55%)", /* Exact match to path color */
+                  background: "hsla(0, 0%, 5%, 0.85)",
+                  backdropFilter: "blur(24px)",
+                  WebkitBackdropFilter: "blur(24px)",
+                  border: "1.5px solid hsl(330 100% 55%)",
                   boxShadow: `
-                    0 -12px 40px hsl(330 100% 55% / 0.5),
-                    0 0 50px hsl(330 100% 55% / 0.3),
-                    0 0 100px hsl(330 100% 50% / 0.2),
-                    inset 0 0 50px hsl(330 100% 55% / 0.1)
+                    0 -15px 50px hsl(330 100% 55% / 0.6),
+                    0 0 60px hsl(330 100% 55% / 0.35),
+                    0 0 120px hsl(330 100% 50% / 0.2),
+                    inset 0 0 60px hsl(330 100% 55% / 0.08)
                   `,
                 }}
               >
-                {/* Glow bloom on top edge - path energy spilling into box */}
+                {/* Pulsing border glow animation */}
+                <motion.div
+                  className="absolute inset-0 rounded-2xl pointer-events-none"
+                  style={{ border: "1.5px solid hsl(330 100% 60%)" }}
+                  animate={{
+                    boxShadow: [
+                      `0 0 20px hsl(330 100% 55% / 0.3), inset 0 0 20px hsl(330 100% 55% / 0.05)`,
+                      `0 0 35px hsl(330 100% 55% / 0.5), inset 0 0 35px hsl(330 100% 55% / 0.1)`,
+                      `0 0 20px hsl(330 100% 55% / 0.3), inset 0 0 20px hsl(330 100% 55% / 0.05)`,
+                    ],
+                  }}
+                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                />
+                
+                {/* Glow bloom on top edge */}
                 <div
-                  className="absolute -top-1 left-1/2 -translate-x-1/2 w-48 h-12 pointer-events-none"
+                  className="absolute -top-2 left-1/2 -translate-x-1/2 w-56 h-16 pointer-events-none"
                   style={{
-                    background: "radial-gradient(ellipse at center top, hsl(330 100% 60% / 0.7) 0%, hsl(330 100% 55% / 0.3) 40%, transparent 70%)",
-                    filter: "blur(12px)",
+                    background: "radial-gradient(ellipse at center top, hsl(330 100% 60% / 0.8) 0%, hsl(330 100% 55% / 0.4) 40%, transparent 70%)",
+                    filter: "blur(16px)",
                   }}
                 />
                 
                 {/* Inner glow gradient */}
                 <div
-                  className="absolute inset-0 pointer-events-none"
-                  style={{
-                    background: "radial-gradient(ellipse at center top, hsl(330 100% 60% / 0.15) 0%, transparent 50%)",
-                  }}
+                  className="absolute inset-0 pointer-events-none rounded-2xl"
+                  style={{ background: "radial-gradient(ellipse at center top, hsl(330 100% 60% / 0.12) 0%, transparent 50%)" }}
                 />
                 
                 {/* Content */}
-                <div className="relative z-10 pt-2">
+                <div className="relative z-10 pt-4">
                   <p
-                    className="text-base sm:text-lg md:text-xl mb-4 sm:mb-6 font-light tracking-wide"
+                    className="text-base sm:text-lg md:text-xl mb-5 sm:mb-7 font-light tracking-wide"
                     style={{
-                      color: "hsl(0, 0%, 95%)",
-                      textShadow: "0 0 20px hsla(0, 0%, 100%, 0.2)",
+                      fontFamily: "Inter, system-ui, sans-serif",
+                      color: "hsl(0, 0%, 92%)",
+                      textShadow: "0 0 20px hsla(0, 0%, 100%, 0.15)",
                     }}
                   >
                     Many things are yet to be explored in Hyderabad.
                   </p>
                   <p
-                    className="text-xl sm:text-2xl md:text-3xl font-serif italic"
+                    className="text-2xl sm:text-3xl md:text-4xl font-serif italic"
                     style={{
                       color: "hsl(0, 0%, 100%)",
                       textShadow: `
-                        0 0 20px hsla(330, 100%, 70%, 0.4),
-                        0 0 40px hsla(330, 100%, 60%, 0.2)
+                        0 0 25px hsla(330, 100%, 70%, 0.5),
+                        0 0 50px hsla(330, 100%, 60%, 0.25)
                       `,
                     }}
                   >
                     "Hyderabad is an emotion."
                   </p>
+                </div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
           </div>
         </div>
       </div>
 
-      {/* Footer */}
-      <footer className="relative min-h-[50vh] sm:min-h-[60vh] flex items-end justify-center text-center overflow-hidden px-4 sm:px-6 pb-10 sm:pb-14">
+      {/* Footer - Text positioned at bottom 20% of Golconda image */}
+      <footer className="relative min-h-[60vh] sm:min-h-[70vh] flex items-end justify-center text-center overflow-hidden px-4 sm:px-6">
         {/* Background Image */}
         <div 
           className="absolute inset-0"
@@ -334,19 +324,19 @@ const Index = () => {
             backgroundPosition: "center",
           }}
         />
-        {/* Dark gradient overlay at bottom for text clarity */}
+        {/* Gradient overlay for text clarity */}
         <div 
           className="absolute inset-0"
           style={{
-            background: "linear-gradient(to bottom, hsl(0 0% 0% / 0.4) 0%, hsl(0 0% 0% / 0.6) 50%, hsl(0 0% 0% / 0.85) 100%)",
+            background: "linear-gradient(to bottom, hsl(0 0% 0% / 0.3) 0%, hsl(0 0% 0% / 0.5) 60%, hsl(0 0% 0% / 0.9) 100%)",
           }}
         />
         
-        {/* Content - Bottom aligned stack */}
-        <div className="relative z-10 flex flex-col items-center">
-          {/* Discover tagline - Subtle white with elegant glow */}
+        {/* Content - Positioned at bottom 20% */}
+        <div className="relative z-10 flex flex-col items-center pb-[8%] sm:pb-[10%]">
+          {/* Discover tagline */}
           <p 
-            className="text-xs sm:text-sm md:text-base tracking-wider mb-2 sm:mb-3"
+            className="text-sm sm:text-base md:text-lg tracking-wider mb-3 sm:mb-4"
             style={{
               color: "hsl(0, 0%, 100%)",
               textShadow: "0 0 20px hsla(0, 0%, 100%, 0.4), 0 0 40px hsla(0, 0%, 100%, 0.2)",
@@ -355,9 +345,9 @@ const Index = () => {
             Discover the pearl of the Deccan
           </p>
           
-          {/* Hyderabad Snapshot - Medium yellow with soft glow */}
+          {/* Hyderabad Snapshot */}
           <h2 
-            className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-4 sm:mb-5"
+            className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-5 sm:mb-6"
             style={{
               color: "hsl(50 100% 55%)",
               textShadow: "0 0 25px hsla(50, 100%, 55%, 0.5), 0 0 50px hsla(50, 100%, 55%, 0.25)",
@@ -366,10 +356,10 @@ const Index = () => {
             Hyderabad Snapshot
           </h2>
           
-          {/* Creator Credit with LinkedIn - Sleek white with elegant glow */}
-          <div className="flex items-center justify-center gap-2 sm:gap-3">
+          {/* Creator Credit - Uniform white, increased size */}
+          <div className="flex items-center justify-center gap-3 sm:gap-4">
             <span 
-              className="text-sm sm:text-base md:text-lg lg:text-xl tracking-wide"
+              className="text-base sm:text-lg md:text-xl lg:text-2xl tracking-wide"
               style={{
                 fontFamily: "Inter, system-ui, sans-serif",
                 fontWeight: 400,
@@ -383,7 +373,7 @@ const Index = () => {
               href="https://www.linkedin.com/in/tarun-tej-gajibimkar/"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2.5 sm:p-3 rounded-full transition-all hover:scale-110"
+              className="p-3 sm:p-3.5 rounded-full transition-all hover:scale-110"
               style={{
                 background: "hsla(210, 100%, 60%, 0.15)",
                 border: "1px solid hsl(210, 100%, 60%)",
@@ -392,8 +382,8 @@ const Index = () => {
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="22"
-                height="22"
+                width="24"
+                height="24"
                 viewBox="0 0 24 24"
                 fill="currentColor"
                 className="text-[hsl(210,100%,60%)]"
