@@ -37,10 +37,13 @@ const Index = () => {
       {/* Hero Section */}
       <HeroSection />
 
-      {/* Begin Journey Button - Positioned entirely within black section, flush at top */}
-      <div className="relative z-30 flex justify-center" style={{ marginTop: "-1px" }}>
+      {/* Begin Journey Button - Flush at top of black section with bridge to path */}
+      <div 
+        className="relative z-30 flex flex-col items-center" 
+        style={{ marginTop: "-20px" }}
+      >
         <motion.button
-          className="flex flex-col items-center gap-2 sm:gap-3 cursor-pointer group pt-6 sm:pt-8"
+          className="flex flex-col items-center gap-2 sm:gap-3 cursor-pointer group"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.9, duration: 0.8 }}
@@ -106,25 +109,31 @@ const Index = () => {
               }}
             />
           </motion.div>
-          
-          {/* Connecting glow line to heritage path */}
-          <motion.div
-            className="w-1 h-16 sm:h-24 rounded-full"
-            style={{
-              background: "linear-gradient(to bottom, hsl(50 100% 55%), hsl(35 95% 50%), hsl(25 100% 50%))",
-              boxShadow: `
-                0 0 10px hsl(50 100% 55% / 0.9),
-                0 0 20px hsl(40 100% 55% / 0.6),
-                0 0 35px hsl(30 100% 50% / 0.4)
-              `,
-            }}
-            animate={{
-              opacity: [0.7, 1, 0.7],
-              scaleY: [0.95, 1.05, 0.95],
-            }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          />
         </motion.button>
+        
+        {/* Vertical bridge line - connects yellow arrow to orange heritage path */}
+        <motion.div
+          className="w-1 rounded-full"
+          style={{
+            height: "120px",
+            background: "linear-gradient(to bottom, hsl(50 100% 55%) 0%, hsl(35 100% 50%) 30%, hsl(25 100% 50%) 100%)",
+            boxShadow: `
+              0 0 10px hsl(25 100% 50% / 1),
+              0 0 20px hsl(25 100% 50% / 0.8),
+              0 0 40px hsl(25 100% 50% / 0.5),
+              0 0 60px hsl(25 100% 50% / 0.3)
+            `,
+          }}
+          initial={{ scaleY: 0, originY: 0 }}
+          animate={{ 
+            scaleY: 1,
+            opacity: [0.8, 1, 0.8],
+          }}
+          transition={{ 
+            scaleY: { delay: 2.2, duration: 0.8, ease: "easeOut" },
+            opacity: { delay: 3, duration: 2, repeat: Infinity, ease: "easeInOut" }
+          }}
+        />
       </div>
 
       {/* Glow Road - Desktop */}
