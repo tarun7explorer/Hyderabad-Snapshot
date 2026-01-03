@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
+import { ChevronDown } from "lucide-react";
 import buddhaStatue from "@/assets/buddha-statue-night.jpg";
-import { sections } from "@/data/hyderabadContent";
 
 const HeroSection = () => {
   return (
@@ -136,7 +136,7 @@ const HeroSection = () => {
 
         {/* Sub-tagline with intense warm glow */}
         <motion.p
-          className="font-serif italic mb-8 sm:mb-10"
+          className="font-serif italic mb-4 sm:mb-6"
           style={{
             fontSize: "clamp(1rem, 3vw, 1.25rem)",
             color: "hsl(0, 0%, 100%)",
@@ -154,43 +154,23 @@ const HeroSection = () => {
           Dil se Hyderabadi
         </motion.p>
 
-        {/* Section Categories Grid */}
-        <motion.div
-          className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 max-w-2xl mx-auto mt-4"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+        {/* 3-line Hyderabad description */}
+        <motion.p
+          className="max-w-3xl mx-auto font-sans text-center px-6 sm:px-8"
+          style={{
+            fontSize: "clamp(0.8rem, 2vw, 1rem)",
+            lineHeight: 1.8,
+            color: "hsl(0, 0%, 95%)",
+            textShadow: "0 0 8px hsl(0 0% 0% / 0.8)",
+          }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
           transition={{ delay: 1.5, duration: 0.8 }}
         >
-          {sections.map((section, index) => (
-            <motion.a
-              key={section.id}
-              href={`#${section.id}`}
-              className="group relative px-4 py-3 sm:px-6 sm:py-4 rounded-xl text-center transition-all duration-300"
-              style={{
-                background: "hsla(0, 0%, 5%, 0.7)",
-                backdropFilter: "blur(12px)",
-                border: `1px solid ${section.glowColor}40`,
-              }}
-              whileHover={{ 
-                scale: 1.05,
-                boxShadow: `0 0 20px ${section.glowColor}40, 0 0 40px ${section.glowColor}20`,
-              }}
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.6 + index * 0.1, duration: 0.5 }}
-            >
-              <span
-                className="text-sm sm:text-base font-medium tracking-wide"
-                style={{
-                  color: section.glowColor,
-                  textShadow: `0 0 10px ${section.glowColor}60`,
-                }}
-              >
-                {section.title}
-              </span>
-            </motion.a>
-          ))}
-        </motion.div>
+          Hyderabad, the "City of Pearls," is a captivating blend of 400 years of history and a rapidly growing global technology hub. As the capital of Telangana, it is world-renowned for its iconic Charminar and the aromatic Hyderabadi Biryani, reflecting a rich Nizami heritage.
+          <br /><br />
+          Today, the city stands as a premier destination for the IT and pharmaceutical industries. Its unique charm lies in the seamless coexistence of ancient palaces and bustling traditional bazaars with modern glass skyscrapers and a vibrant, cosmopolitan lifestyle.
+        </motion.p>
       </motion.div>
 
     </section>

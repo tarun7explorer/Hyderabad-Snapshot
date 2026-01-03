@@ -10,32 +10,34 @@ interface UnifiedGlowPathProps {
 const UnifiedGlowPath = ({ scrollProgress, currentSectionIndex }: UnifiedGlowPathProps) => {
   const pathRef = useRef<SVGPathElement>(null);
 
-  // Single continuous path from top of viewport through all sections to finale
-  // Path starts cleanly from top without any starting icon
+  // Single continuous path from start (Begin Journey) through all sections to finale
+  // Total height: 200 (bridge) + 2100 (main road) + 150 (finale) = 2450
   const unifiedPathD = `
-    M 50 -50
-    L 50 100
-    C 50 150, 35 250, 35 400
-    S 65 600, 50 750
-    C 35 900, 30 1050, 50 1200
-    S 70 1350, 65 1500
-    C 60 1650, 35 1800, 50 1950
-    S 65 2100, 50 2250
-    C 35 2400, 40 2550, 50 2700
-    S 60 2850, 65 3000
-    C 70 3150, 50 3250, 50 3350
-    L 50 3500
-    L 50 3600
+    M 50 0
+    L 50 200
+    C 50 220, 35 260, 35 310
+    S 65 410, 50 480
+    C 35 550, 30 610, 50 680
+    S 70 750, 65 820
+    C 60 890, 35 960, 50 1030
+    S 65 1100, 50 1170
+    C 35 1240, 40 1310, 50 1380
+    S 60 1450, 65 1520
+    C 70 1590, 35 1660, 50 1730
+    S 65 1800, 50 1870
+    C 35 1940, 45 2010, 50 2080
+    L 50 2300
+    L 50 2450
   `;
 
-  // Card positions aligned with path curves - adjusted for gallery spacing
+  // Card positions aligned with path curves
   const cardPositions = [
     { y: 380 },
-    { y: 900 },
-    { y: 1420 },
-    { y: 1940 },
-    { y: 2460 },
-    { y: 2980 },
+    { y: 700 },
+    { y: 1020 },
+    { y: 1340 },
+    { y: 1660 },
+    { y: 1980 },
   ];
 
   return (
@@ -43,24 +45,28 @@ const UnifiedGlowPath = ({ scrollProgress, currentSectionIndex }: UnifiedGlowPat
       className="absolute left-1/2 -translate-x-1/2 pointer-events-none"
       style={{ 
         top: 0,
-        height: "3600px", 
+        height: "2450px", 
         width: "200px", 
         zIndex: 0 
       }}
     >
       <svg
         className="absolute inset-0 w-full h-full overflow-visible"
-        viewBox="0 0 100 3600"
+        viewBox="0 0 100 2450"
         preserveAspectRatio="none"
       >
         <defs>
-          {/* Gradient through all sections to pink finale */}
+          {/* Extended gradient from golden start through all sections to pink finale */}
           <linearGradient id="unifiedRoadGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-            {/* Section colors flowing through the path */}
+            {/* Golden/Yellow start (Begin Journey) */}
+            <stop offset="0%" stopColor="hsl(50 100% 55%)" />
+            <stop offset="4%" stopColor="hsl(45 100% 52%)" />
+            <stop offset="8%" stopColor="hsl(30 100% 50%)" />
+            {/* Section colors */}
             {sections.map((section, i) => (
               <stop
                 key={section.id}
-                offset={`${(i / (sections.length - 1)) * 90}%`}
+                offset={`${10 + (i / (sections.length - 1)) * 80}%`}
                 stopColor={section.glowColor}
               />
             ))}
@@ -171,11 +177,23 @@ const UnifiedGlowPath = ({ scrollProgress, currentSectionIndex }: UnifiedGlowPat
           </motion.circle>
         ))}
 
-        {/* Road starts cleanly from top - no start node */}
+        {/* Start node (Begin Journey anchor) */}
+        <motion.circle
+          cx="50"
+          cy="10"
+          r="8"
+          fill="hsl(50 100% 55%)"
+          filter="url(#unifiedNeonGlow)"
+          animate={{
+            scale: [1, 1.2, 1],
+          }}
+          transition={{ duration: 2, repeat: Infinity }}
+        />
+        <circle cx="50" cy="10" r="3" fill="white" opacity="0.9" />
 
         {/* Section markers (glowing nodes with pulsing halos) */}
         {cardPositions.map((pos, i) => {
-          const pathProgress = pos.y / 3600;
+          const pathProgress = pos.y / 2450;
           const isReached = scrollProgress >= pathProgress - 0.05;
           const isActive = currentSectionIndex === i;
           const section = sections[i];
@@ -253,7 +271,7 @@ const UnifiedGlowPath = ({ scrollProgress, currentSectionIndex }: UnifiedGlowPat
         {/* Finale terminal node */}
         <motion.circle
           cx="50"
-          cy="3500"
+          cy="2350"
           r="12"
           fill="hsl(330 100% 60%)"
           filter="url(#unifiedNeonGlow)"
@@ -264,7 +282,7 @@ const UnifiedGlowPath = ({ scrollProgress, currentSectionIndex }: UnifiedGlowPat
         />
         <motion.circle
           cx="50"
-          cy="3500"
+          cy="2350"
           r="20"
           fill="none"
           stroke="hsl(330 100% 60%)"
@@ -272,7 +290,7 @@ const UnifiedGlowPath = ({ scrollProgress, currentSectionIndex }: UnifiedGlowPat
           animate={{ scale: [1, 2], opacity: [0.8, 0] }}
           transition={{ duration: 1.5, repeat: Infinity, ease: "easeOut" }}
         />
-        <circle cx="50" cy="3500" r="5" fill="white" opacity="0.9" />
+        <circle cx="50" cy="2350" r="5" fill="white" opacity="0.9" />
       </svg>
     </div>
   );
