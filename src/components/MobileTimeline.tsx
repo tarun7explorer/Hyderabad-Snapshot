@@ -73,23 +73,38 @@ const MobileTimeline = ({ onNodeClick, activeSection }: MobileTimelineProps) => 
                     alt={section.title}
                     className="w-full h-full object-cover object-center"
                   />
+                  {/* Enhanced gradient overlay for readability */}
                   <div 
                     className="absolute inset-0"
                     style={{
-                      background: `linear-gradient(to top, hsl(0 0% 2%) 0%, transparent 60%)`,
+                      background: `linear-gradient(to top, hsl(0 0% 2%) 0%, hsl(0 0% 2% / 0.7) 50%, transparent 80%)`,
                     }}
                   />
                 </div>
 
-                {/* Content */}
-                <div className="p-4 sm:p-5">
+                {/* Content with enhanced readability */}
+                <div 
+                  className="p-4 sm:p-5"
+                  style={{
+                    background: "linear-gradient(to top, hsl(0 0% 4% / 0.95) 0%, hsl(0 0% 4% / 0.8) 100%)",
+                  }}
+                >
                   <h3
                     className="font-serif text-lg sm:text-xl font-bold mb-2"
-                    style={{ color: section.accentColor }}
+                    style={{ 
+                      color: section.accentColor,
+                      textShadow: `0 0 15px ${section.accentColor}50`,
+                    }}
                   >
                     {section.title}
                   </h3>
-                  <p className="text-xs sm:text-sm text-muted-foreground line-clamp-2">
+                  <p 
+                    className="text-xs sm:text-sm line-clamp-2"
+                    style={{
+                      color: "hsl(0, 0%, 100%)",
+                      lineHeight: 1.7,
+                    }}
+                  >
                     {section.tagline}
                   </p>
                 </div>

@@ -15,11 +15,11 @@ const HeroSection = () => {
         }}
       />
       
-      {/* Dark overlay for text readability */}
+      {/* Dark overlay for text readability - enhanced contrast */}
       <div 
         className="absolute inset-0"
         style={{
-          background: "linear-gradient(to bottom, hsl(0 0% 0% / 0.6) 0%, hsl(0 0% 0% / 0.7) 50%, hsl(0 0% 2% / 0.95) 100%)",
+          background: "linear-gradient(to bottom, hsl(0 0% 0% / 0.75) 0%, hsl(0 0% 0% / 0.8) 50%, hsl(0 0% 2% / 0.98) 100%)",
         }}
       />
 
@@ -76,17 +76,19 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.8 }}
         >
-          {/* Hyderabad with Yellow Glow */}
+          {/* Hyderabad with Intense Yellow Neon Glow */}
           <motion.span
             className="block"
             style={{
-              color: "hsl(50, 100%, 55%)",
+              color: "hsl(50, 100%, 60%)",
               textShadow: `
-                0 0 10px hsl(50 100% 50% / 0.8),
-                0 0 20px hsl(50 100% 50% / 0.6),
-                0 0 40px hsl(50 100% 50% / 0.4),
-                0 0 80px hsl(50 100% 50% / 0.3),
-                0 0 120px hsl(50 100% 50% / 0.2)
+                0 0 5px hsl(50 100% 70% / 1),
+                0 0 10px hsl(50 100% 60% / 1),
+                0 0 20px hsl(50 100% 55% / 0.9),
+                0 0 40px hsl(50 100% 50% / 0.8),
+                0 0 80px hsl(50 100% 50% / 0.6),
+                0 0 120px hsl(50 100% 50% / 0.4),
+                0 0 180px hsl(50 100% 50% / 0.3)
               `,
             }}
             initial={{ opacity: 0 }}
@@ -96,16 +98,18 @@ const HeroSection = () => {
             Hyderabad
           </motion.span>
           
-          {/* Snapshot with White Glow */}
+          {/* Snapshot with Intense White Neon Glow */}
           <motion.span
             className="block"
             style={{
               color: "hsl(0, 0%, 100%)",
               textShadow: `
-                0 0 10px hsl(0 0% 100% / 0.9),
-                0 0 20px hsl(0 0% 100% / 0.7),
-                0 0 40px hsl(0 0% 100% / 0.5),
-                0 0 80px hsl(0 0% 100% / 0.3)
+                0 0 5px hsl(0 0% 100% / 1),
+                0 0 10px hsl(0 0% 100% / 1),
+                0 0 20px hsl(0 0% 100% / 0.9),
+                0 0 40px hsl(0 0% 100% / 0.7),
+                0 0 80px hsl(0 0% 100% / 0.5),
+                0 0 120px hsl(0 0% 100% / 0.3)
               `,
             }}
             initial={{ opacity: 0 }}
@@ -117,9 +121,11 @@ const HeroSection = () => {
         </motion.h1>
 
         <motion.p
-          className="text-muted-foreground max-w-2xl mx-auto mb-3 sm:mb-4 font-sans font-light tracking-wide"
+          className="max-w-2xl mx-auto mb-3 sm:mb-4 font-sans font-light tracking-wide"
           style={{
             fontSize: "clamp(0.875rem, 2.5vw, 1.25rem)",
+            color: "hsl(0, 0%, 100%)",
+            textShadow: "0 0 10px hsl(0 0% 100% / 0.4), 0 0 20px hsl(0 0% 100% / 0.2)",
           }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -128,16 +134,17 @@ const HeroSection = () => {
           Discover Hyderabad: Where History Meets Innovation
         </motion.p>
 
-        {/* Sub-tagline with warm glow */}
+        {/* Sub-tagline with intense warm glow */}
         <motion.p
           className="font-serif italic mb-8 sm:mb-10"
           style={{
             fontSize: "clamp(1rem, 3vw, 1.25rem)",
-            color: "hsl(35, 100%, 65%)",
+            color: "hsl(0, 0%, 100%)",
             textShadow: `
-              0 0 8px hsl(35 100% 50% / 0.5),
-              0 0 20px hsl(35 100% 50% / 0.3),
-              0 0 40px hsl(35 100% 50% / 0.2)
+              0 0 5px hsl(0 0% 100% / 0.8),
+              0 0 15px hsl(35 100% 60% / 0.6),
+              0 0 30px hsl(35 100% 55% / 0.4),
+              0 0 50px hsl(35 100% 50% / 0.3)
             `,
           }}
           initial={{ opacity: 0 }}
@@ -173,10 +180,10 @@ const HeroSection = () => {
         onClick={() => window.scrollTo({ top: window.innerHeight, behavior: "smooth" })}
       >
         <span 
-          className="text-xs tracking-[0.2em] uppercase group-hover:opacity-100 transition-opacity"
+          className="text-xs tracking-[0.2em] uppercase font-medium"
           style={{
-            color: "hsl(50 100% 55%)",
-            opacity: 0.7,
+            color: "hsl(50 100% 60%)",
+            textShadow: "0 0 10px hsl(50 100% 55% / 0.8), 0 0 20px hsl(50 100% 50% / 0.5)",
           }}
         >
           Begin Journey
@@ -184,16 +191,21 @@ const HeroSection = () => {
         <motion.div
           className="p-2 rounded-full"
           style={{
-            background: "hsla(0, 0%, 100%, 0.05)",
-            border: "1px solid hsla(50, 100%, 55%, 0.3)",
-            boxShadow: "0 0 20px hsla(50, 100%, 55%, 0.2)",
+            background: "hsla(0, 0%, 100%, 0.08)",
+            border: "2px solid hsl(50, 100%, 55%)",
+            boxShadow: `
+              0 0 15px hsl(50 100% 55% / 0.8),
+              0 0 30px hsl(50 100% 55% / 0.5),
+              0 0 50px hsl(50 100% 55% / 0.3),
+              inset 0 0 10px hsl(50 100% 55% / 0.2)
+            `,
           }}
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 1.5, repeat: Infinity }}
         >
           <ChevronDown 
             className="w-5 h-5" 
-            style={{ color: "hsl(50 100% 55%)" }}
+            style={{ color: "hsl(50 100% 60%)" }}
           />
         </motion.div>
       </motion.div>
