@@ -37,51 +37,58 @@ const DetailView = ({ section, isOpen, onClose, onNavigate }: DetailViewProps) =
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            {/* Navigation Controls */}
-            <div className="fixed top-6 left-6 right-6 z-60 flex justify-between items-center">
-              <div className="flex gap-3">
-                <motion.button
-                  onClick={() => onNavigate("prev")}
-                  disabled={!hasPrev}
-                  className="p-3 rounded-full transition-all disabled:opacity-30 disabled:cursor-not-allowed"
-                  style={{
-                    background: "hsla(0, 0%, 100%, 0.05)",
-                    backdropFilter: "blur(12px)",
-                    border: "1px solid hsla(0, 0%, 100%, 0.1)",
-                  }}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <ChevronLeft className="w-6 h-6" />
-                </motion.button>
-                <motion.button
-                  onClick={() => onNavigate("next")}
-                  disabled={!hasNext}
-                  className="p-3 rounded-full transition-all disabled:opacity-30 disabled:cursor-not-allowed"
-                  style={{
-                    background: "hsla(0, 0%, 100%, 0.05)",
-                    backdropFilter: "blur(12px)",
-                    border: "1px solid hsla(0, 0%, 100%, 0.1)",
-                  }}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <ChevronRight className="w-6 h-6" />
-                </motion.button>
-              </div>
+            {/* Fixed Close/Return Button - Top Right */}
+            <motion.button
+              onClick={onClose}
+              className="fixed top-6 right-6 z-[60] flex items-center gap-2 px-4 py-3 rounded-full transition-all"
+              style={{
+                background: "hsla(0, 0%, 100%, 0.08)",
+                backdropFilter: "blur(16px)",
+                border: "1px solid hsla(0, 0%, 100%, 0.15)",
+              }}
+              whileHover={{ 
+                scale: 1.05, 
+                backgroundColor: "hsla(0, 0%, 100%, 0.12)",
+                boxShadow: "0 0 20px hsla(0, 0%, 100%, 0.1)",
+              }}
+              whileTap={{ scale: 0.95 }}
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+            >
+              <X className="w-5 h-5" />
+              <span className="text-sm font-medium tracking-wide">Return to Home</span>
+            </motion.button>
 
+            {/* Navigation Controls - Bottom */}
+            <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[60] flex gap-3">
               <motion.button
-                onClick={onClose}
-                className="p-3 rounded-full transition-all"
+                onClick={() => onNavigate("prev")}
+                disabled={!hasPrev}
+                className="p-3 rounded-full transition-all disabled:opacity-30 disabled:cursor-not-allowed"
                 style={{
-                  background: "hsla(0, 0%, 100%, 0.05)",
-                  backdropFilter: "blur(12px)",
-                  border: "1px solid hsla(0, 0%, 100%, 0.1)",
+                  background: "hsla(0, 0%, 100%, 0.08)",
+                  backdropFilter: "blur(16px)",
+                  border: "1px solid hsla(0, 0%, 100%, 0.15)",
                 }}
-                whileHover={{ scale: 1.1, backgroundColor: "hsla(0, 0%, 100%, 0.1)" }}
+                whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <X className="w-6 h-6" />
+                <ChevronLeft className="w-6 h-6" />
+              </motion.button>
+              <motion.button
+                onClick={() => onNavigate("next")}
+                disabled={!hasNext}
+                className="p-3 rounded-full transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+                style={{
+                  background: "hsla(0, 0%, 100%, 0.08)",
+                  backdropFilter: "blur(16px)",
+                  border: "1px solid hsla(0, 0%, 100%, 0.15)",
+                }}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <ChevronRight className="w-6 h-6" />
               </motion.button>
             </div>
 
