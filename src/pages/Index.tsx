@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import HeroSection from "@/components/HeroSection";
@@ -6,12 +6,44 @@ import GlowRoad from "@/components/GlowRoad";
 import MobileTimeline from "@/components/MobileTimeline";
 import DetailView from "@/components/DetailView";
 import BackToTop from "@/components/BackToTop";
+import UnifiedGlowPath from "@/components/UnifiedGlowPath";
 import { sections, Section } from "@/data/hyderabadContent";
 import footerBg from "@/assets/golconda-sunset.jpg";
 
 const Index = () => {
   const [selectedSection, setSelectedSection] = useState<Section | null>(null);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
+  const journeyContainerRef = useRef<HTMLDivElement>(null);
+
+  // Track scroll progress for the unified path
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!journeyContainerRef.current) return;
+
+      const rect = journeyContainerRef.current.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      const containerTop = rect.top;
+      const containerHeight = rect.height;
+
+      const scrolled = windowHeight - containerTop;
+      const totalScrollable = containerHeight + windowHeight;
+      const progress = Math.max(0, Math.min(1, scrolled / totalScrollable));
+
+      setScrollProgress(progress);
+
+      // Determine current section
+      const sectionProgress = progress * sections.length;
+      const newSectionIndex = Math.min(Math.floor(sectionProgress), sections.length - 1);
+      setCurrentSectionIndex(newSectionIndex);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const handleCardClick = (sectionId: string) => {
     const section = sections.find((s) => s.id === sectionId);
@@ -39,8 +71,9 @@ const Index = () => {
         <HeroSection />
       </div>
 
-      {/* Black Section Container - physically merged with hero */}
+      {/* Journey Section Container - contains unified SVG path */}
       <div 
+        ref={journeyContainerRef}
         className="relative"
         style={{ 
           background: "hsl(0 0% 2%)",
@@ -48,7 +81,17 @@ const Index = () => {
           paddingTop: 0,
         }}
       >
-        {/* Begin Journey - Entirely inside black section with zero gap */}
+        {/* Unified SVG Path - spans entire journey section (hidden on mobile) */}
+        <div className="hidden md:block absolute inset-0 overflow-visible" style={{ zIndex: 1 }}>
+          <div className="relative w-full flex justify-center">
+            <UnifiedGlowPath 
+              scrollProgress={scrollProgress} 
+              currentSectionIndex={currentSectionIndex} 
+            />
+          </div>
+        </div>
+
+        {/* Begin Journey - positioned above path start */}
         <div 
           className="relative z-30 flex flex-col items-center pt-8 sm:pt-12"
           style={{ margin: 0 }}
@@ -117,69 +160,10 @@ const Index = () => {
               />
             </motion.div>
           </motion.button>
-          
-          {/* Physical Bridge Line - Seamless transition with dual-tone styling */}
-          <motion.div
-            className="relative flex flex-col items-center"
-            style={{
-              marginTop: "-14px",
-              marginBottom: 0,
-            }}
-            initial={{ scaleY: 0, originY: 0 }}
-            animate={{ scaleY: 1 }}
-            transition={{ delay: 2.2, duration: 0.8, ease: "easeOut" }}
-          >
-            {/* Outer glow layer for depth */}
-            <div
-              className="absolute left-1/2 -translate-x-1/2 w-4"
-              style={{
-                height: "200px",
-                background: "linear-gradient(to bottom, hsl(50 100% 55% / 0.3) 0%, hsl(35 100% 50% / 0.3) 50%, hsl(30 100% 50% / 0.3) 100%)",
-                borderRadius: "8px",
-                filter: "blur(12px)",
-              }}
-            />
-            
-            {/* Main path - white center with colored borders (dual-tone) */}
-            <div
-              className="relative w-2"
-              style={{
-                height: "200px",
-                background: "linear-gradient(to bottom, hsl(50 100% 55%) 0%, hsl(45 100% 52%) 20%, hsl(35 100% 50%) 50%, hsl(30 100% 50%) 100%)",
-                borderRadius: "4px",
-                boxShadow: `
-                  0 0 8px hsl(35 100% 50% / 1),
-                  0 0 20px hsl(35 100% 50% / 0.8),
-                  0 0 40px hsl(30 100% 50% / 0.5),
-                  0 0 80px hsl(30 100% 50% / 0.3),
-                  0 0 120px hsl(30 100% 50% / 0.2)
-                `,
-              }}
-            >
-              {/* White center line for dual-tone effect */}
-              <div
-                className="absolute left-1/2 -translate-x-1/2 w-0.5"
-                style={{
-                  top: "2px",
-                  bottom: "2px",
-                  background: "linear-gradient(to bottom, hsl(0 0% 100% / 0.7) 0%, hsl(0 0% 100% / 0.5) 100%)",
-                  borderRadius: "2px",
-                }}
-              />
-              
-              {/* Flowing energy pulse */}
-              <motion.div
-                className="absolute left-0 right-0 h-12 rounded-full"
-                style={{ background: "linear-gradient(to bottom, transparent, hsl(50 100% 80% / 0.9), transparent)" }}
-                animate={{ top: ["-48px", "200px"] }}
-                transition={{ duration: 1.5, repeat: Infinity, ease: "linear", delay: 3 }}
-              />
-            </div>
-          </motion.div>
         </div>
 
-        {/* Glow Road - Desktop (seamless connection to bridge) */}
-        <section className="hidden md:block" style={{ marginTop: "0px" }}>
+        {/* Glow Road - Desktop (cards only, path is in UnifiedGlowPath) */}
+        <section className="hidden md:block" style={{ marginTop: "60px" }}>
           <GlowRoad
             onCardClick={handleCardClick}
             activeSection={selectedSection?.id || null}
@@ -194,99 +178,9 @@ const Index = () => {
           />
         </section>
 
-        {/* Final Destination - Physical Path-to-Flashcard Merger */}
-        <div className="relative z-20 flex flex-col items-center pb-16 sm:pb-24">
-          {/* Unified vertical stack with zero gap */}
-          <div className="relative flex flex-col items-center" style={{ gap: 0 }}>
-            {/* Pink path line with dual-tone styling - matches upper path consistency */}
-            <div
-              className="relative flex flex-col items-center"
-              style={{ marginTop: "-4px" }}
-            >
-              {/* Outer glow layer */}
-              <div
-                className="absolute left-1/2 -translate-x-1/2 w-4"
-                style={{
-                  height: "140px",
-                  background: "linear-gradient(to bottom, hsl(330 100% 60% / 0.3) 0%, hsl(330 100% 55% / 0.3) 100%)",
-                  borderRadius: "8px",
-                  filter: "blur(12px)",
-                }}
-              />
-              
-              {/* Main pink path - consistent stroke-width and glow */}
-              <div
-                className="relative w-2"
-                style={{
-                  height: "140px",
-                  background: "linear-gradient(to bottom, hsl(330 100% 60%) 0%, hsl(330 100% 55%) 100%)",
-                  borderRadius: "4px",
-                  boxShadow: `
-                    0 0 8px hsl(330 100% 60% / 1),
-                    0 0 20px hsl(330 100% 55% / 0.8),
-                    0 0 40px hsl(330 100% 50% / 0.5),
-                    0 0 80px hsl(330 100% 50% / 0.3)
-                  `,
-                  zIndex: 30,
-                }}
-              >
-                {/* White center line for dual-tone effect */}
-                <div
-                  className="absolute left-1/2 -translate-x-1/2 w-0.5"
-                  style={{
-                    top: "2px",
-                    bottom: "2px",
-                    background: "linear-gradient(to bottom, hsl(0 0% 100% / 0.6) 0%, hsl(0 0% 100% / 0.4) 100%)",
-                    borderRadius: "2px",
-                  }}
-                />
-                
-                {/* Energy flow inside line */}
-                <motion.div
-                  className="absolute left-0 right-0 w-full h-10 rounded-full"
-                  style={{ background: "linear-gradient(to bottom, transparent, hsl(330 100% 80% / 0.9), transparent)" }}
-                  animate={{ top: ["-40px", "140px"] }}
-                  transition={{ duration: 1.2, repeat: Infinity, ease: "linear" }}
-                />
-              </div>
-            </div>
-            
-            {/* Terminal Node - flush on flashcard top border */}
-            <motion.div
-              className="relative z-50 flex items-center justify-center"
-              style={{ marginTop: "-14px", marginBottom: "-14px" }}
-            >
-              <motion.div
-                className="w-7 h-7 rounded-full"
-                style={{
-                  background: "radial-gradient(circle at 30% 30%, hsl(330 100% 80%), hsl(330 100% 55%))",
-                  boxShadow: `
-                    0 0 20px hsl(330 100% 60% / 1),
-                    0 0 40px hsl(330 100% 55% / 1),
-                    0 0 60px hsl(330 100% 50% / 0.7),
-                    0 0 100px hsl(330 100% 50% / 0.5)
-                  `,
-                }}
-                animate={{
-                  scale: [1, 1.15, 1],
-                  boxShadow: [
-                    `0 0 20px hsl(330 100% 60% / 1), 0 0 40px hsl(330 100% 55% / 1), 0 0 60px hsl(330 100% 50% / 0.7), 0 0 100px hsl(330 100% 50% / 0.5)`,
-                    `0 0 30px hsl(330 100% 60% / 1), 0 0 60px hsl(330 100% 55% / 1), 0 0 100px hsl(330 100% 50% / 0.9), 0 0 140px hsl(330 100% 50% / 0.6)`,
-                    `0 0 20px hsl(330 100% 60% / 1), 0 0 40px hsl(330 100% 55% / 1), 0 0 60px hsl(330 100% 50% / 0.7), 0 0 100px hsl(330 100% 50% / 0.5)`,
-                  ],
-                }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              />
-              {/* Outer pulse ring */}
-              <motion.div
-                className="absolute inset-0 rounded-full"
-                style={{ border: "2px solid hsl(330 100% 60%)" }}
-                animate={{ scale: [1, 2.5], opacity: [0.8, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity, ease: "easeOut" }}
-              />
-            </motion.div>
-            
-            {/* Premium Glassmorphism Flashcard */}
+        {/* Final Destination - Flashcard (path is handled by UnifiedGlowPath) */}
+        <div className="relative z-20 flex flex-col items-center pb-16 sm:pb-24 hidden md:flex">
+          {/* Premium Glassmorphism Flashcard */}
             <motion.div
               className="relative mx-4 sm:mx-8 max-w-xl w-full"
               style={{ zIndex: 20 }}
@@ -366,7 +260,6 @@ const Index = () => {
                 </div>
               </div>
             </motion.div>
-          </div>
         </div>
       </div>
 
