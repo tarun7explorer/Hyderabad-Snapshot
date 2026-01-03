@@ -118,39 +118,68 @@ const Index = () => {
             </motion.div>
           </motion.button>
           
-          {/* Physical Bridge Line - ZERO gap, overlaps arrow and path */}
+          {/* Physical Bridge Line - Seamless transition with dual-tone styling */}
           <motion.div
-            className="w-2 relative"
+            className="relative flex flex-col items-center"
             style={{
-              height: "180px",
               marginTop: "-14px",
-              marginBottom: "-6px",
-              background: "linear-gradient(to bottom, hsl(50 100% 55%) 0%, hsl(45 100% 52%) 15%, hsl(35 100% 50%) 40%, hsl(25 100% 50%) 100%)",
-              borderRadius: "4px",
-              boxShadow: `
-                0 0 15px hsl(25 100% 50% / 1),
-                0 0 30px hsl(25 100% 50% / 0.9),
-                0 0 60px hsl(25 100% 50% / 0.6),
-                0 0 100px hsl(25 100% 50% / 0.4),
-                0 0 150px hsl(25 100% 50% / 0.25)
-              `,
+              marginBottom: 0,
             }}
             initial={{ scaleY: 0, originY: 0 }}
             animate={{ scaleY: 1 }}
             transition={{ delay: 2.2, duration: 0.8, ease: "easeOut" }}
           >
-            {/* Flowing energy pulse */}
-            <motion.div
-              className="absolute left-0 right-0 h-10 rounded-full"
-              style={{ background: "linear-gradient(to bottom, transparent, hsl(50 100% 70% / 0.9), transparent)" }}
-              animate={{ top: ["-40px", "180px"] }}
-              transition={{ duration: 1.2, repeat: Infinity, ease: "linear", delay: 3 }}
+            {/* Outer glow layer for depth */}
+            <div
+              className="absolute left-1/2 -translate-x-1/2 w-4"
+              style={{
+                height: "200px",
+                background: "linear-gradient(to bottom, hsl(50 100% 55% / 0.3) 0%, hsl(35 100% 50% / 0.3) 50%, hsl(30 100% 50% / 0.3) 100%)",
+                borderRadius: "8px",
+                filter: "blur(12px)",
+              }}
             />
+            
+            {/* Main path - white center with colored borders (dual-tone) */}
+            <div
+              className="relative w-2"
+              style={{
+                height: "200px",
+                background: "linear-gradient(to bottom, hsl(50 100% 55%) 0%, hsl(45 100% 52%) 20%, hsl(35 100% 50%) 50%, hsl(30 100% 50%) 100%)",
+                borderRadius: "4px",
+                boxShadow: `
+                  0 0 8px hsl(35 100% 50% / 1),
+                  0 0 20px hsl(35 100% 50% / 0.8),
+                  0 0 40px hsl(30 100% 50% / 0.5),
+                  0 0 80px hsl(30 100% 50% / 0.3),
+                  0 0 120px hsl(30 100% 50% / 0.2)
+                `,
+              }}
+            >
+              {/* White center line for dual-tone effect */}
+              <div
+                className="absolute left-1/2 -translate-x-1/2 w-0.5"
+                style={{
+                  top: "2px",
+                  bottom: "2px",
+                  background: "linear-gradient(to bottom, hsl(0 0% 100% / 0.7) 0%, hsl(0 0% 100% / 0.5) 100%)",
+                  borderRadius: "2px",
+                }}
+              />
+              
+              {/* Flowing energy pulse */}
+              <motion.div
+                className="absolute left-0 right-0 h-12 rounded-full"
+                style={{ background: "linear-gradient(to bottom, transparent, hsl(50 100% 80% / 0.9), transparent)" }}
+                animate={{ top: ["-48px", "200px"] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: "linear", delay: 3 }}
+              />
+            </div>
           </motion.div>
         </div>
 
-        {/* Glow Road - Desktop (zero margin, connects directly to bridge) */}
-        <section className="hidden md:block" style={{ marginTop: "-8px" }}>
+        {/* Glow Road - Desktop (seamless connection to bridge) */}
+        <section className="hidden md:block" style={{ marginTop: "0px" }}>
           <GlowRoad
             onCardClick={handleCardClick}
             activeSection={selectedSection?.id || null}
@@ -158,7 +187,7 @@ const Index = () => {
         </section>
 
         {/* Mobile Timeline */}
-        <section className="md:hidden" style={{ marginTop: "-8px" }}>
+        <section className="md:hidden" style={{ marginTop: "0px" }}>
           <MobileTimeline
             onNodeClick={handleCardClick}
             activeSection={selectedSection?.id || null}
@@ -169,29 +198,57 @@ const Index = () => {
         <div className="relative z-20 flex flex-col items-center pb-16 sm:pb-24">
           {/* Unified vertical stack with zero gap */}
           <div className="relative flex flex-col items-center" style={{ gap: 0 }}>
-            {/* Pink path line - terminates inside terminal node */}
+            {/* Pink path line with dual-tone styling - matches upper path consistency */}
             <div
-              className="w-1.5 relative"
-              style={{
-                height: "120px",
-                background: "linear-gradient(to bottom, hsl(330 100% 60%) 0%, hsl(330 100% 55%) 100%)",
-                borderRadius: "4px 4px 0 0",
-                boxShadow: `
-                  0 0 15px hsl(330 100% 60% / 1),
-                  0 0 30px hsl(330 100% 55% / 0.8),
-                  0 0 50px hsl(330 100% 50% / 0.5),
-                  0 0 80px hsl(330 100% 50% / 0.3)
-                `,
-                zIndex: 30,
-              }}
+              className="relative flex flex-col items-center"
+              style={{ marginTop: "-4px" }}
             >
-              {/* Energy flow inside line */}
-              <motion.div
-                className="absolute left-0 right-0 w-full h-8 rounded-full"
-                style={{ background: "linear-gradient(to bottom, transparent, hsl(330 100% 80% / 0.9), transparent)" }}
-                animate={{ top: ["-32px", "120px"] }}
-                transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+              {/* Outer glow layer */}
+              <div
+                className="absolute left-1/2 -translate-x-1/2 w-4"
+                style={{
+                  height: "140px",
+                  background: "linear-gradient(to bottom, hsl(330 100% 60% / 0.3) 0%, hsl(330 100% 55% / 0.3) 100%)",
+                  borderRadius: "8px",
+                  filter: "blur(12px)",
+                }}
               />
+              
+              {/* Main pink path - consistent stroke-width and glow */}
+              <div
+                className="relative w-2"
+                style={{
+                  height: "140px",
+                  background: "linear-gradient(to bottom, hsl(330 100% 60%) 0%, hsl(330 100% 55%) 100%)",
+                  borderRadius: "4px",
+                  boxShadow: `
+                    0 0 8px hsl(330 100% 60% / 1),
+                    0 0 20px hsl(330 100% 55% / 0.8),
+                    0 0 40px hsl(330 100% 50% / 0.5),
+                    0 0 80px hsl(330 100% 50% / 0.3)
+                  `,
+                  zIndex: 30,
+                }}
+              >
+                {/* White center line for dual-tone effect */}
+                <div
+                  className="absolute left-1/2 -translate-x-1/2 w-0.5"
+                  style={{
+                    top: "2px",
+                    bottom: "2px",
+                    background: "linear-gradient(to bottom, hsl(0 0% 100% / 0.6) 0%, hsl(0 0% 100% / 0.4) 100%)",
+                    borderRadius: "2px",
+                  }}
+                />
+                
+                {/* Energy flow inside line */}
+                <motion.div
+                  className="absolute left-0 right-0 w-full h-10 rounded-full"
+                  style={{ background: "linear-gradient(to bottom, transparent, hsl(330 100% 80% / 0.9), transparent)" }}
+                  animate={{ top: ["-40px", "140px"] }}
+                  transition={{ duration: 1.2, repeat: Infinity, ease: "linear" }}
+                />
+              </div>
             </div>
             
             {/* Terminal Node - flush on flashcard top border */}

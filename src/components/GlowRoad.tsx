@@ -54,30 +54,33 @@ const GlowRoad = ({ onCardClick, activeSection }: GlowRoadProps) => {
     return sections[currentSectionIndex]?.glowColor || "hsl(45, 90%, 53%)";
   }, [currentSectionIndex]);
 
-  // Extended organic path for 6 sections (removed Infrastructure)
+  // Extended organic path for 6 sections with smooth S-curves (seamless connection)
+  // Path starts at center top and flows organically with gentle curves
   const pathD = `
     M 50 0
-    C 25 80, 75 120, 50 200
-    Q 20 280, 50 360
-    C 80 440, 85 520, 50 600
-    Q 15 680, 45 760
-    C 80 840, 75 920, 50 1000
-    Q 20 1080, 50 1160
-    C 80 1240, 70 1320, 50 1400
-    Q 25 1480, 50 1560
-    C 75 1640, 80 1720, 50 1800
-    Q 20 1880, 50 1960
+    L 50 40
+    C 50 60, 30 100, 30 150
+    S 70 250, 50 320
+    C 30 390, 25 450, 50 520
+    S 75 590, 70 660
+    C 65 730, 30 800, 50 870
+    S 70 940, 50 1010
+    C 30 1080, 35 1150, 50 1220
+    S 65 1290, 70 1360
+    C 75 1430, 30 1500, 50 1570
+    S 70 1640, 50 1710
+    C 30 1780, 45 1850, 50 1920
     L 50 2100
   `;
 
-  // Position cards along the road - 6 sections
+  // Position cards along the road - 6 sections (aligned with path curves)
   const cardPositions = [
-    { y: 150 },
-    { y: 480 },
-    { y: 810 },
+    { y: 180 },
+    { y: 500 },
+    { y: 820 },
     { y: 1140 },
-    { y: 1470 },
-    { y: 1800 },
+    { y: 1460 },
+    { y: 1780 },
   ];
 
   return (
@@ -97,8 +100,29 @@ const GlowRoad = ({ onCardClick, activeSection }: GlowRoadProps) => {
       />
 
       <div className="max-w-6xl mx-auto relative px-4" style={{ height: "2200px" }}>
-        {/* The Eternal Glow Road SVG */}
-        <div className="absolute left-1/2 top-0 -translate-x-1/2" style={{ height: "2100px", width: "200px" }}>
+        {/* Connection point from bridge - seamless overlap */}
+        <div 
+          className="absolute left-1/2 -translate-x-1/2 -top-3"
+          style={{ zIndex: 5 }}
+        >
+          <div
+            className="w-3 h-12 rounded-full"
+            style={{
+              background: "linear-gradient(to bottom, hsl(25 100% 50%) 0%, hsl(30 100% 50%) 100%)",
+              boxShadow: `
+                0 0 12px hsl(30 100% 50% / 0.9),
+                0 0 24px hsl(30 100% 50% / 0.6),
+                0 0 40px hsl(30 100% 50% / 0.4)
+              `,
+            }}
+          />
+        </div>
+        
+        {/* The Eternal Glow Road SVG - z-index ensures it stays behind cards */}
+        <div 
+          className="absolute left-1/2 top-0 -translate-x-1/2 pointer-events-none" 
+          style={{ height: "2100px", width: "200px", zIndex: 0 }}
+        >
           <svg
             className="absolute inset-0 w-full h-full"
             viewBox="0 0 100 2100"
@@ -313,6 +337,7 @@ const GlowRoad = ({ onCardClick, activeSection }: GlowRoadProps) => {
                 top: position.y,
                 paddingLeft: isEven ? "0" : "50%",
                 paddingRight: isEven ? "50%" : "0",
+                zIndex: 10,
               }}
             >
               <div className={`px-4 ${isEven ? "pr-24" : "pl-24"}`}>
