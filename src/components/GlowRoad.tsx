@@ -81,13 +81,13 @@ const GlowRoad = ({ onCardClick, activeSection }: GlowRoadProps) => {
   ];
 
   return (
-    <div ref={containerRef} className="relative w-full py-16 md:py-32 overflow-x-hidden">
-      {/* Ambient background glow that follows scroll */}
+    <div ref={containerRef} className="relative w-full py-12 sm:py-16 md:py-32 overflow-x-hidden px-4 sm:px-6">
+      {/* Ambient background glow that follows scroll - reduced on mobile */}
       <motion.div
-        className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full pointer-events-none z-0"
+        className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] sm:w-[600px] md:w-[800px] h-[400px] sm:h-[600px] md:h-[800px] rounded-full pointer-events-none z-0"
         style={{
-          background: `radial-gradient(circle, ${currentGlowColor}15 0%, ${currentGlowColor}05 40%, transparent 70%)`,
-          filter: "blur(60px)",
+          background: `radial-gradient(circle, ${currentGlowColor}10 0%, ${currentGlowColor}03 40%, transparent 70%)`,
+          filter: "blur(40px)",
         }}
         animate={{
           scale: [1, 1.1, 1],
@@ -143,35 +143,38 @@ const GlowRoad = ({ onCardClick, activeSection }: GlowRoadProps) => {
               </linearGradient>
             </defs>
 
-            {/* Road bed (dark shadow) - ALWAYS VISIBLE */}
+              {/* Road bed (dark shadow) - ALWAYS VISIBLE - thinner on mobile */}
             <path
               d={pathD}
               fill="none"
               stroke="hsl(0 0% 8%)"
-              strokeWidth="24"
+              strokeWidth="16"
               strokeLinecap="round"
+              className="md:[stroke-width:24]"
             />
 
-            {/* Outer glow layer - ALWAYS LIT */}
+            {/* Outer glow layer - ALWAYS LIT - reduced glow on mobile */}
             <path
               d={pathD}
               fill="none"
               stroke="url(#roadGradient)"
-              strokeWidth="16"
+              strokeWidth="10"
               strokeLinecap="round"
-              style={{ filter: "blur(12px)" }}
-              opacity={0.4}
+              style={{ filter: "blur(8px)" }}
+              opacity={0.3}
+              className="md:[stroke-width:16] md:opacity-40"
             />
 
-            {/* Main glowing road - core - ALWAYS LIT */}
+            {/* Main glowing road - core - ALWAYS LIT - thinner on mobile */}
             <path
               ref={pathRef}
               d={pathD}
               fill="none"
               stroke="url(#roadGradient)"
-              strokeWidth="8"
+              strokeWidth="5"
               strokeLinecap="round"
               filter="url(#neonGlow)"
+              className="md:[stroke-width:8]"
             />
 
             {/* Bright center line - ALWAYS LIT */}
@@ -179,9 +182,10 @@ const GlowRoad = ({ onCardClick, activeSection }: GlowRoadProps) => {
               d={pathD}
               fill="none"
               stroke="white"
-              strokeWidth="2"
+              strokeWidth="1"
               strokeLinecap="round"
-              opacity={0.6}
+              opacity={0.5}
+              className="md:[stroke-width:2] md:opacity-60"
             />
 
             {/* Energy pulse traveling along the road */}

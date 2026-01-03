@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ChevronLeft, ChevronRight, ArrowUp } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { sections, Section } from "@/data/hyderabadContent";
+import ChameleonHomeButton from "./ChameleonHomeButton";
 
 interface DetailViewProps {
   section: Section | null;
@@ -37,28 +38,11 @@ const DetailView = ({ section, isOpen, onClose, onNavigate }: DetailViewProps) =
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            {/* Fixed Close/Return Button - Top Right */}
-            <motion.button
-              onClick={onClose}
-              className="fixed top-6 right-6 z-[60] flex items-center gap-2 px-4 py-3 rounded-full transition-all"
-              style={{
-                background: "hsla(0, 0%, 100%, 0.08)",
-                backdropFilter: "blur(16px)",
-                border: "1px solid hsla(0, 0%, 100%, 0.15)",
-              }}
-              whileHover={{ 
-                scale: 1.05, 
-                backgroundColor: "hsla(0, 0%, 100%, 0.12)",
-                boxShadow: "0 0 20px hsla(0, 0%, 100%, 0.1)",
-              }}
-              whileTap={{ scale: 0.95 }}
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-            >
-              <X className="w-5 h-5" />
-              <span className="text-sm font-medium tracking-wide">Return to Home</span>
-            </motion.button>
+            {/* Chameleon Home Button - Contextual Glow */}
+            <ChameleonHomeButton 
+              accentColor={section.accentColor} 
+              onClick={onClose} 
+            />
 
             {/* Navigation Controls - Bottom */}
             <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[60] flex gap-3">
@@ -94,13 +78,13 @@ const DetailView = ({ section, isOpen, onClose, onNavigate }: DetailViewProps) =
 
             {/* Hero Image with shared element transition */}
             <motion.div
-              className="relative h-[50vh] overflow-hidden"
+              className="relative h-[40vh] sm:h-[50vh] overflow-hidden"
               layoutId={`image-${section.id}`}
             >
               <img
                 src={section.image}
                 alt={section.title}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover object-center"
               />
               {/* Gradient overlays */}
               <div
@@ -129,7 +113,7 @@ const DetailView = ({ section, isOpen, onClose, onNavigate }: DetailViewProps) =
             </motion.div>
 
             {/* Content */}
-            <div className="relative -mt-24 px-6 md:px-12 lg:px-24 pb-20">
+            <div className="relative -mt-16 sm:-mt-24 px-4 sm:px-6 md:px-12 lg:px-24 pb-24 sm:pb-20">
               {/* Icon and Title */}
               <div className="mb-12">
                 <motion.div
@@ -146,7 +130,7 @@ const DetailView = ({ section, isOpen, onClose, onNavigate }: DetailViewProps) =
                 </motion.div>
 
                 <motion.h1
-                  className="font-serif text-5xl md:text-7xl font-bold mb-4"
+                  className="font-serif text-3xl sm:text-5xl md:text-7xl font-bold mb-3 sm:mb-4"
                   style={{ color: section.accentColor }}
                   layoutId={`title-${section.id}`}
                 >
@@ -154,7 +138,7 @@ const DetailView = ({ section, isOpen, onClose, onNavigate }: DetailViewProps) =
                 </motion.h1>
 
                 <motion.p
-                  className="text-xl md:text-2xl text-muted-foreground max-w-3xl"
+                  className="text-base sm:text-xl md:text-2xl text-muted-foreground max-w-3xl"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 }}
@@ -173,7 +157,7 @@ const DetailView = ({ section, isOpen, onClose, onNavigate }: DetailViewProps) =
               </div>
 
               {/* Masonry Grid - 10-15 Items */}
-              <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
+              <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 sm:gap-6 space-y-4 sm:space-y-6">
                 {section.items.map((item, index) => (
                   <motion.div
                     key={item.id}
