@@ -52,7 +52,7 @@ const Index = () => {
       </section>
 
       {/* Footer */}
-      <footer className="relative min-h-[50vh] sm:min-h-[60vh] flex items-center justify-center text-center overflow-hidden px-4 sm:px-6">
+      <footer className="relative min-h-[50vh] sm:min-h-[60vh] flex items-end justify-center text-center overflow-hidden px-4 sm:px-6 pb-10 sm:pb-14">
         {/* Background Image */}
         <div 
           className="absolute inset-0"
@@ -62,51 +62,44 @@ const Index = () => {
             backgroundPosition: "center",
           }}
         />
-        {/* Dark Overlay - enhanced for text visibility */}
-        <div className="absolute inset-0 bg-black/80" />
+        {/* Dark gradient overlay at bottom for text clarity */}
+        <div 
+          className="absolute inset-0"
+          style={{
+            background: "linear-gradient(to bottom, hsl(0 0% 0% / 0.4) 0%, hsl(0 0% 0% / 0.6) 50%, hsl(0 0% 0% / 0.85) 100%)",
+          }}
+        />
         
-        {/* Content - Vertically Centered Stack */}
+        {/* Content - Bottom aligned stack */}
         <div className="relative z-10 flex flex-col items-center">
-          {/* Discover tagline */}
+          {/* Discover tagline - Pure White, no heavy glow */}
           <p 
             className="text-sm sm:text-base md:text-lg tracking-wider mb-3 sm:mb-4"
             style={{
-              color: "hsl(0, 0%, 90%)",
-              textShadow: "0 0 10px hsl(0 0% 100% / 0.3)",
+              color: "hsl(0, 0%, 100%)",
             }}
           >
             Discover the pearl of the Deccan
           </p>
           
-          {/* Hyderabad Snapshot - Yellow Glow Title */}
+          {/* Hyderabad Snapshot - Solid Yellow, minimal glow */}
           <h2 
-            className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-6 sm:mb-8"
+            className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-5 sm:mb-6"
             style={{
               color: "hsl(50 100% 55%)",
-              textShadow: `
-                0 0 5px hsl(50 100% 70% / 1),
-                0 0 10px hsl(50 100% 60% / 0.9),
-                0 0 20px hsl(50 100% 55% / 0.7),
-                0 0 40px hsl(50 100% 50% / 0.5),
-                0 0 80px hsl(50 100% 50% / 0.3)
-              `,
             }}
           >
             Hyderabad Snapshot
           </h2>
           
-          {/* Spacer */}
-          <div className="h-5" />
-          
-          {/* Creator Credit with LinkedIn */}
+          {/* Creator Credit with LinkedIn - Pure White, uniform font, larger size */}
           <div className="flex items-center justify-center gap-3 sm:gap-4">
             <span 
-              className="text-lg sm:text-xl md:text-2xl lg:text-3xl tracking-wide"
+              className="text-xl sm:text-2xl md:text-3xl lg:text-4xl tracking-wide"
               style={{
                 fontFamily: "Inter, system-ui, sans-serif",
-                fontWeight: 500,
+                fontWeight: 400,
                 color: "hsl(0, 0%, 100%)",
-                textShadow: "0 0 15px hsl(0 0% 100% / 0.5), 0 0 30px hsl(0 0% 100% / 0.3)",
               }}
             >
               Made by Tarun Tej Gajibimkar
@@ -119,7 +112,6 @@ const Index = () => {
               style={{
                 background: "hsla(210, 100%, 60%, 0.15)",
                 border: "1px solid hsl(210, 100%, 60%)",
-                boxShadow: "0 0 15px hsl(210 100% 60% / 0.5), 0 0 30px hsl(210 100% 60% / 0.3)",
               }}
               aria-label="LinkedIn Profile"
             >
@@ -130,9 +122,6 @@ const Index = () => {
                 viewBox="0 0 24 24"
                 fill="currentColor"
                 className="text-[hsl(210,100%,60%)]"
-                style={{
-                  filter: "drop-shadow(0 0 5px hsl(210 100% 60%))",
-                }}
               >
                 <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
               </svg>
