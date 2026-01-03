@@ -47,14 +47,14 @@ const GlowRoad = ({ onCardClick, activeSection }: GlowRoadProps) => {
     return sections[currentSectionIndex]?.glowColor || "hsl(45, 90%, 53%)";
   }, [currentSectionIndex]);
 
-  // Card positions aligned with unified path (offset by 200 for bridge section)
+  // Card positions aligned with unified path - increased spacing for galleries
   const cardPositions = [
     { y: 180 },
-    { y: 500 },
-    { y: 820 },
-    { y: 1140 },
-    { y: 1460 },
-    { y: 1780 },
+    { y: 700 },
+    { y: 1220 },
+    { y: 1740 },
+    { y: 2260 },
+    { y: 2780 },
   ];
 
   return (
@@ -73,7 +73,7 @@ const GlowRoad = ({ onCardClick, activeSection }: GlowRoadProps) => {
         transition={{ duration: 4, repeat: Infinity }}
       />
 
-      <div className="max-w-6xl mx-auto relative px-4" style={{ height: "2200px" }}>
+      <div className="max-w-6xl mx-auto relative px-4" style={{ height: "3400px" }}>
         {/* Feature Cards positioned along the road */}
         {sections.map((section, index) => {
           const isEven = index % 2 === 0;
