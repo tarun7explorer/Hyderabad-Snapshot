@@ -54,7 +54,7 @@ const GlowRoad = ({ onCardClick, activeSection }: GlowRoadProps) => {
     return sections[currentSectionIndex]?.glowColor || "hsl(45, 90%, 53%)";
   }, [currentSectionIndex]);
 
-  // More organic, winding path
+  // Extended organic path for 6 sections (removed Infrastructure)
   const pathD = `
     M 50 0
     C 25 80, 75 120, 50 200
@@ -67,11 +67,10 @@ const GlowRoad = ({ onCardClick, activeSection }: GlowRoadProps) => {
     Q 25 1480, 50 1560
     C 75 1640, 80 1720, 50 1800
     Q 20 1880, 50 1960
-    C 75 2040, 70 2120, 50 2200
-    Q 30 2280, 50 2340
+    L 50 2100
   `;
 
-  // Position cards along the road
+  // Position cards along the road - 6 sections
   const cardPositions = [
     { y: 150 },
     { y: 480 },
@@ -79,7 +78,6 @@ const GlowRoad = ({ onCardClick, activeSection }: GlowRoadProps) => {
     { y: 1140 },
     { y: 1470 },
     { y: 1800 },
-    { y: 2130 },
   ];
 
   return (
@@ -98,12 +96,12 @@ const GlowRoad = ({ onCardClick, activeSection }: GlowRoadProps) => {
         transition={{ duration: 4, repeat: Infinity }}
       />
 
-      <div className="max-w-6xl mx-auto relative px-4" style={{ height: "2500px" }}>
-        {/* The Glow Road SVG */}
-        <div className="absolute left-1/2 top-0 -translate-x-1/2" style={{ height: "2400px", width: "200px" }}>
+      <div className="max-w-6xl mx-auto relative px-4" style={{ height: "2200px" }}>
+        {/* The Eternal Glow Road SVG */}
+        <div className="absolute left-1/2 top-0 -translate-x-1/2" style={{ height: "2100px", width: "200px" }}>
           <svg
             className="absolute inset-0 w-full h-full"
-            viewBox="0 0 100 2340"
+            viewBox="0 0 100 2100"
             preserveAspectRatio="none"
           >
             <defs>
@@ -118,11 +116,11 @@ const GlowRoad = ({ onCardClick, activeSection }: GlowRoadProps) => {
                 ))}
               </linearGradient>
 
-              {/* Intense neon glow */}
+              {/* Intense neon glow filter */}
               <filter id="neonGlow" x="-100%" y="-100%" width="300%" height="300%">
                 <feGaussianBlur stdDeviation="4" result="blur1" />
                 <feGaussianBlur stdDeviation="8" result="blur2" />
-                <feGaussianBlur stdDeviation="12" result="blur3" />
+                <feGaussianBlur stdDeviation="16" result="blur3" />
                 <feMerge>
                   <feMergeNode in="blur3" />
                   <feMergeNode in="blur2" />
@@ -134,62 +132,56 @@ const GlowRoad = ({ onCardClick, activeSection }: GlowRoadProps) => {
               {/* Animated energy pulse */}
               <linearGradient id="energyPulse" x1="0%" y1="0%" x2="0%" y2="100%">
                 <stop offset="0%" stopColor="transparent">
-                  <animate attributeName="offset" values="-0.3;1.3" dur="2s" repeatCount="indefinite" />
+                  <animate attributeName="offset" values="-0.3;1.3" dur="3s" repeatCount="indefinite" />
                 </stop>
-                <stop offset="15%" stopColor="white" stopOpacity="0.8">
-                  <animate attributeName="offset" values="-0.15;1.45" dur="2s" repeatCount="indefinite" />
+                <stop offset="10%" stopColor="white" stopOpacity="0.9">
+                  <animate attributeName="offset" values="-0.2;1.4" dur="3s" repeatCount="indefinite" />
                 </stop>
-                <stop offset="30%" stopColor="transparent">
-                  <animate attributeName="offset" values="0;1.6" dur="2s" repeatCount="indefinite" />
+                <stop offset="20%" stopColor="transparent">
+                  <animate attributeName="offset" values="-0.1;1.5" dur="3s" repeatCount="indefinite" />
                 </stop>
               </linearGradient>
             </defs>
 
-            {/* Road bed (dark shadow) */}
+            {/* Road bed (dark shadow) - ALWAYS VISIBLE */}
             <path
               d={pathD}
               fill="none"
-              stroke="hsl(0 0% 5%)"
-              strokeWidth="20"
+              stroke="hsl(0 0% 8%)"
+              strokeWidth="24"
               strokeLinecap="round"
             />
 
-            {/* Main glowing road - outer glow */}
-            <motion.path
+            {/* Outer glow layer - ALWAYS LIT */}
+            <path
               d={pathD}
               fill="none"
-              stroke={currentGlowColor}
-              strokeWidth="12"
+              stroke="url(#roadGradient)"
+              strokeWidth="16"
               strokeLinecap="round"
-              strokeDasharray={pathLength}
-              strokeDashoffset={pathLength * (1 - scrollProgress)}
-              style={{ filter: "blur(8px)" }}
-              opacity={0.6}
+              style={{ filter: "blur(12px)" }}
+              opacity={0.4}
             />
 
-            {/* Main glowing road - core */}
-            <motion.path
+            {/* Main glowing road - core - ALWAYS LIT */}
+            <path
               ref={pathRef}
               d={pathD}
               fill="none"
               stroke="url(#roadGradient)"
-              strokeWidth="6"
+              strokeWidth="8"
               strokeLinecap="round"
-              strokeDasharray={pathLength}
-              strokeDashoffset={pathLength * (1 - scrollProgress)}
               filter="url(#neonGlow)"
             />
 
-            {/* Bright center line */}
-            <motion.path
+            {/* Bright center line - ALWAYS LIT */}
+            <path
               d={pathD}
               fill="none"
               stroke="white"
               strokeWidth="2"
               strokeLinecap="round"
-              strokeDasharray={pathLength}
-              strokeDashoffset={pathLength * (1 - scrollProgress)}
-              opacity={0.8}
+              opacity={0.6}
             />
 
             {/* Energy pulse traveling along the road */}
@@ -199,65 +191,100 @@ const GlowRoad = ({ onCardClick, activeSection }: GlowRoadProps) => {
               stroke="url(#energyPulse)"
               strokeWidth="4"
               strokeLinecap="round"
-              strokeDasharray={pathLength}
-              strokeDashoffset={pathLength * (1 - scrollProgress)}
             />
 
             {/* Floating particles along the path */}
-            {[0.15, 0.35, 0.55, 0.75, 0.95].map((offset, i) => (
+            {[0.1, 0.25, 0.4, 0.55, 0.7, 0.85].map((offset, i) => (
               <motion.circle
                 key={i}
-                r="4"
+                r="5"
                 fill="white"
                 filter="url(#neonGlow)"
-                initial={{ opacity: 0 }}
                 animate={{
-                  opacity: scrollProgress > offset - 0.1 ? [0, 1, 0] : 0,
+                  opacity: [0, 1, 0],
                 }}
                 transition={{
-                  duration: 1.5,
+                  duration: 2,
                   repeat: Infinity,
-                  delay: i * 0.3,
+                  delay: i * 0.4,
                 }}
               >
-                <animateMotion dur={`${4 + i}s`} repeatCount="indefinite" path={pathD} />
+                <animateMotion dur={`${5 + i}s`} repeatCount="indefinite" path={pathD} />
               </motion.circle>
             ))}
 
-            {/* Section markers (glowing nodes on the path) */}
+            {/* Section markers (glowing nodes with pulsing halos) */}
             {cardPositions.map((pos, i) => {
-              const pathProgress = pos.y / 2340;
-              const isReached = scrollProgress >= pathProgress - 0.1;
+              const pathProgress = pos.y / 2100;
+              const isReached = scrollProgress >= pathProgress - 0.05;
+              const isActive = currentSectionIndex === i;
               const section = sections[i];
+              if (!section) return null;
 
               return (
                 <g key={i}>
-                  {/* Outer pulse ring */}
-                  {isReached && (
+                  {/* Outer pulsing halo - for active node */}
+                  {isActive && (
+                    <>
+                      <motion.circle
+                        cx="50"
+                        cy={pos.y + 50}
+                        r="30"
+                        fill="none"
+                        stroke={section.glowColor}
+                        strokeWidth="2"
+                        initial={{ scale: 0.8, opacity: 0.8 }}
+                        animate={{ scale: 1.5, opacity: 0 }}
+                        transition={{ duration: 1.5, repeat: Infinity }}
+                      />
+                      <motion.circle
+                        cx="50"
+                        cy={pos.y + 50}
+                        r="25"
+                        fill="none"
+                        stroke={section.glowColor}
+                        strokeWidth="1.5"
+                        initial={{ scale: 0.9, opacity: 0.6 }}
+                        animate={{ scale: 1.3, opacity: 0 }}
+                        transition={{ duration: 1.5, repeat: Infinity, delay: 0.3 }}
+                      />
+                    </>
+                  )}
+                  
+                  {/* Reached pulse ring */}
+                  {isReached && !isActive && (
                     <motion.circle
                       cx="50"
                       cy={pos.y + 50}
                       r="20"
                       fill="none"
                       stroke={section.glowColor}
-                      strokeWidth="2"
-                      initial={{ scale: 1, opacity: 0.8 }}
-                      animate={{ scale: 2, opacity: 0 }}
-                      transition={{ duration: 1.5, repeat: Infinity }}
+                      strokeWidth="1"
+                      initial={{ scale: 1, opacity: 0.5 }}
+                      animate={{ scale: 1.8, opacity: 0 }}
+                      transition={{ duration: 2, repeat: Infinity }}
                     />
                   )}
+                  
                   {/* Main node */}
                   <motion.circle
                     cx="50"
                     cy={pos.y + 50}
-                    r={isReached ? 10 : 6}
-                    fill={isReached ? section.glowColor : "hsl(0 0% 20%)"}
+                    r={isActive ? 14 : isReached ? 10 : 6}
+                    fill={isReached ? section.glowColor : "hsl(0 0% 15%)"}
                     filter={isReached ? "url(#neonGlow)" : undefined}
                     transition={{ duration: 0.3 }}
                   />
+                  
                   {/* Inner bright core */}
                   {isReached && (
-                    <circle cx="50" cy={pos.y + 50} r="4" fill="white" opacity="0.9" />
+                    <circle 
+                      cx="50" 
+                      cy={pos.y + 50} 
+                      r={isActive ? 6 : 4} 
+                      fill="white" 
+                      opacity="0.95" 
+                    />
                   )}
                 </g>
               );
@@ -269,8 +296,10 @@ const GlowRoad = ({ onCardClick, activeSection }: GlowRoadProps) => {
         {sections.map((section, index) => {
           const isEven = index % 2 === 0;
           const position = cardPositions[index];
-          const pathProgress = position.y / 2340;
-          const isActive = scrollProgress >= pathProgress - 0.1;
+          if (!position) return null;
+          
+          const pathProgress = position.y / 2100;
+          const isActive = scrollProgress >= pathProgress - 0.05;
 
           return (
             <div
