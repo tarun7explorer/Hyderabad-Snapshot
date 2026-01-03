@@ -190,3 +190,13 @@
     background: hsl(var(--nizam-gold) / 0.5);
   }
 }
+
+/* Hide scrollbar for gallery horizontal scroll */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
