@@ -13,12 +13,18 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        serif: ["Playfair Display", "Georgia", "serif"],
+        sans: ["Inter", "system-ui", "sans-serif"],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        "nizam-gold": "hsl(var(--nizam-gold))",
+        "cyber-blue": "hsl(var(--cyber-blue))",
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
