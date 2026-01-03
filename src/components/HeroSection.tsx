@@ -69,7 +69,7 @@ const HeroSection = () => {
         <motion.h1
           className="font-serif font-bold mb-3 sm:mb-4 md:mb-6"
           style={{
-            fontSize: "clamp(2.5rem, 10vw, 9rem)",
+            fontSize: "clamp(2rem, 8vw, 9rem)",
             lineHeight: 1.1,
           }}
           initial={{ opacity: 0, y: 20 }}
@@ -78,7 +78,7 @@ const HeroSection = () => {
         >
           {/* Hyderabad with Intense Yellow Neon Glow */}
           <motion.span
-            className="block"
+            className="block whitespace-nowrap"
             style={{
               color: "hsl(50, 100%, 60%)",
               textShadow: `
@@ -156,7 +156,7 @@ const HeroSection = () => {
 
         {/* 3-line Hyderabad description */}
         <motion.p
-          className="max-w-3xl mx-auto mb-6 sm:mb-8 font-sans text-center px-2"
+          className="max-w-3xl mx-auto font-sans text-center px-6 sm:px-8"
           style={{
             fontSize: "clamp(0.8rem, 2vw, 1rem)",
             lineHeight: 1.8,
@@ -171,27 +171,11 @@ const HeroSection = () => {
           <br /><br />
           Today, the city stands as a premier destination for the IT and pharmaceutical industries. Its unique charm lies in the seamless coexistence of ancient palaces and bustling traditional bazaars with modern glass skyscrapers and a vibrant, cosmopolitan lifestyle.
         </motion.p>
-
-        {/* Decorative glowing line */}
-        <motion.div
-          className="w-40 h-[2px] mx-auto rounded-full relative"
-          initial={{ scaleX: 0 }}
-          animate={{ scaleX: 1 }}
-          transition={{ delay: 1.7, duration: 0.8 }}
-        >
-          <div 
-            className="absolute inset-0 rounded-full"
-            style={{
-              background: "linear-gradient(90deg, hsl(50 100% 55%), hsl(0 0% 100%), hsl(50 100% 55%))",
-              boxShadow: "0 0 20px hsl(50 100% 55% / 0.6), 0 0 40px hsl(0 0% 100% / 0.3)",
-            }}
-          />
-        </motion.div>
       </motion.div>
 
-      {/* Begin Journey Button - positioned at absolute bottom, entering black section */}
+      {/* Begin Journey Button - positioned fully in black section below hero */}
       <motion.button
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-20 flex flex-col items-center gap-2 cursor-pointer group"
+        className="absolute -bottom-16 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 cursor-pointer group"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.9, duration: 0.8 }}
