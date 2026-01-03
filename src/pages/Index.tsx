@@ -72,34 +72,37 @@ const Index = () => {
         
         {/* Content - Bottom aligned stack */}
         <div className="relative z-10 flex flex-col items-center">
-          {/* Discover tagline - Pure White, no heavy glow */}
+          {/* Discover tagline - Subtle white with elegant glow */}
           <p 
-            className="text-sm sm:text-base md:text-lg tracking-wider mb-3 sm:mb-4"
+            className="text-xs sm:text-sm md:text-base tracking-wider mb-2 sm:mb-3"
             style={{
               color: "hsl(0, 0%, 100%)",
+              textShadow: "0 0 20px hsla(0, 0%, 100%, 0.4), 0 0 40px hsla(0, 0%, 100%, 0.2)",
             }}
           >
             Discover the pearl of the Deccan
           </p>
           
-          {/* Hyderabad Snapshot - Solid Yellow, minimal glow */}
+          {/* Hyderabad Snapshot - Medium yellow with soft glow */}
           <h2 
-            className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-5 sm:mb-6"
+            className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-4 sm:mb-5"
             style={{
               color: "hsl(50 100% 55%)",
+              textShadow: "0 0 25px hsla(50, 100%, 55%, 0.5), 0 0 50px hsla(50, 100%, 55%, 0.25)",
             }}
           >
             Hyderabad Snapshot
           </h2>
           
-          {/* Creator Credit with LinkedIn - Pure White, uniform font, larger size */}
-          <div className="flex items-center justify-center gap-3 sm:gap-4">
+          {/* Creator Credit with LinkedIn - Sleek white with elegant glow */}
+          <div className="flex items-center justify-center gap-2 sm:gap-3">
             <span 
-              className="text-xl sm:text-2xl md:text-3xl lg:text-4xl tracking-wide"
+              className="text-sm sm:text-base md:text-lg lg:text-xl tracking-wide"
               style={{
                 fontFamily: "Inter, system-ui, sans-serif",
                 fontWeight: 400,
                 color: "hsl(0, 0%, 100%)",
+                textShadow: "0 0 20px hsla(0, 0%, 100%, 0.4), 0 0 40px hsla(0, 0%, 100%, 0.2)",
               }}
             >
               Made by Tarun Tej Gajibimkar
