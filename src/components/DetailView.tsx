@@ -8,16 +8,14 @@ interface DetailViewProps {
   isOpen: boolean;
   onClose: () => void;
   onNavigate: (direction: "prev" | "next") => void;
-  onJumpTo?: (sectionId: string) => void;
 }
 
-const DetailView = ({ section, isOpen, onClose, onNavigate, onJumpTo }: DetailViewProps) => {
+const DetailView = ({ section, isOpen, onClose, onNavigate }: DetailViewProps) => {
   if (!section) return null;
 
-  const totalSections = sections.length;
   const currentIndex = sections.findIndex((s) => s.id === section.id);
   const hasPrev = currentIndex > 0;
-  const hasNext = currentIndex < totalSections - 1;
+  const hasNext = currentIndex < sections.length - 1;
 
   return (
     <AnimatePresence>
@@ -47,56 +45,32 @@ const DetailView = ({ section, isOpen, onClose, onNavigate, onJumpTo }: DetailVi
             />
 
             {/* Navigation Controls - Bottom */}
-            <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[60] flex items-center gap-3">
+            <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[60] flex gap-3">
               <motion.button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  console.log("Prev clicked, hasPrev:", hasPrev, "currentIndex:", currentIndex);
-                  if (hasPrev) onNavigate("prev");
-                }}
+                onClick={() => onNavigate("prev")}
                 disabled={!hasPrev}
                 className="p-3 rounded-full transition-all disabled:opacity-30 disabled:cursor-not-allowed"
                 style={{
                   background: "hsla(0, 0%, 100%, 0.08)",
                   backdropFilter: "blur(16px)",
                   border: "1px solid hsla(0, 0%, 100%, 0.15)",
-                  pointerEvents: "auto",
                 }}
-                whileHover={hasPrev ? { scale: 1.1 } : {}}
-                whileTap={hasPrev ? { scale: 0.95 } : {}}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
               >
                 <ChevronLeft className="w-6 h-6" />
               </motion.button>
-              
-              {/* Section indicator */}
-              <div 
-                className="px-4 py-2 rounded-full text-sm font-medium"
-                style={{
-                  background: "hsla(0, 0%, 100%, 0.08)",
-                  backdropFilter: "blur(16px)",
-                  border: "1px solid hsla(0, 0%, 100%, 0.15)",
-                  color: section.accentColor,
-                }}
-              >
-                {currentIndex + 1} / {totalSections}
-              </div>
-              
               <motion.button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  console.log("Next clicked, hasNext:", hasNext, "currentIndex:", currentIndex, "totalSections:", totalSections);
-                  if (hasNext) onNavigate("next");
-                }}
+                onClick={() => onNavigate("next")}
                 disabled={!hasNext}
                 className="p-3 rounded-full transition-all disabled:opacity-30 disabled:cursor-not-allowed"
                 style={{
                   background: "hsla(0, 0%, 100%, 0.08)",
                   backdropFilter: "blur(16px)",
                   border: "1px solid hsla(0, 0%, 100%, 0.15)",
-                  pointerEvents: "auto",
                 }}
-                whileHover={hasNext ? { scale: 1.1 } : {}}
-                whileTap={hasNext ? { scale: 0.95 } : {}}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
               >
                 <ChevronRight className="w-6 h-6" />
               </motion.button>
@@ -262,8 +236,15 @@ const DetailView = ({ section, isOpen, onClose, onNavigate, onJumpTo }: DetailVi
                     }}
                     whileHover={{ scale: 1.2 }}
                     onClick={() => {
-                      if (s.id !== section.id) {
-                        onJumpTo?.(s.id);
+                      const diff = i - currentIndex;
+                      if (diff < 0) {
+                        for (let j = 0; j < Math.abs(diff); j++) {
+                          setTimeout(() => onNavigate("prev"), j * 100);
+                        }
+                      } else if (diff > 0) {
+                        for (let j = 0; j < diff; j++) {
+                          setTimeout(() => onNavigate("next"), j * 100);
+                        }
                       }
                     }}
                   />

@@ -48,14 +48,13 @@ const GlowRoad = ({ onCardClick, activeSection }: GlowRoadProps) => {
   }, [currentSectionIndex]);
 
   // Card positions aligned with unified path (offset by 200 for bridge section)
-  // Increased spacing to ensure all 6 cards are fully visible
   const cardPositions = [
     { y: 180 },
-    { y: 520 },
-    { y: 860 },
-    { y: 1200 },
-    { y: 1540 },
-    { y: 1880 },
+    { y: 500 },
+    { y: 820 },
+    { y: 1140 },
+    { y: 1460 },
+    { y: 1780 },
   ];
 
   return (
@@ -74,14 +73,14 @@ const GlowRoad = ({ onCardClick, activeSection }: GlowRoadProps) => {
         transition={{ duration: 4, repeat: Infinity }}
       />
 
-      <div className="max-w-6xl mx-auto relative px-4" style={{ height: "2400px" }}>
+      <div className="max-w-6xl mx-auto relative px-4" style={{ height: "2200px" }}>
         {/* Feature Cards positioned along the road */}
         {sections.map((section, index) => {
           const isEven = index % 2 === 0;
           const position = cardPositions[index];
           if (!position) return null;
           
-          const pathProgress = position.y / 2400;
+          const pathProgress = position.y / 2200;
           const isActive = scrollProgress >= pathProgress - 0.05;
 
           return (
