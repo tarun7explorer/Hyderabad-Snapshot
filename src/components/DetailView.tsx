@@ -47,10 +47,11 @@ const DetailView = ({ section, isOpen, onClose, onNavigate, onJumpTo }: DetailVi
             />
 
             {/* Navigation Controls - Bottom */}
-            <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[60] flex gap-3">
+            <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[60] flex items-center gap-3">
               <motion.button
                 onClick={(e) => {
                   e.stopPropagation();
+                  console.log("Prev clicked, hasPrev:", hasPrev, "currentIndex:", currentIndex);
                   if (hasPrev) onNavigate("prev");
                 }}
                 disabled={!hasPrev}
@@ -66,9 +67,24 @@ const DetailView = ({ section, isOpen, onClose, onNavigate, onJumpTo }: DetailVi
               >
                 <ChevronLeft className="w-6 h-6" />
               </motion.button>
+              
+              {/* Section indicator */}
+              <div 
+                className="px-4 py-2 rounded-full text-sm font-medium"
+                style={{
+                  background: "hsla(0, 0%, 100%, 0.08)",
+                  backdropFilter: "blur(16px)",
+                  border: "1px solid hsla(0, 0%, 100%, 0.15)",
+                  color: section.accentColor,
+                }}
+              >
+                {currentIndex + 1} / {totalSections}
+              </div>
+              
               <motion.button
                 onClick={(e) => {
                   e.stopPropagation();
+                  console.log("Next clicked, hasNext:", hasNext, "currentIndex:", currentIndex, "totalSections:", totalSections);
                   if (hasNext) onNavigate("next");
                 }}
                 disabled={!hasNext}
