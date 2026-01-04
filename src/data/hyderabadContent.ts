@@ -56,7 +56,7 @@ export const sections: Section[] = [
         id: "irani-chai",
         name: "Irani Chai at Nimrah",
         description: "Charminar's soul served in a glass cup, paired with Osmania biscuits.",
-        image: "https://images.unsplash.com/photo-1619117081917-05303257914e?auto=format&fit=crop&w=800&q=80",
+        image: "https://ibb.co/mV81hf48",
       },
       {
         id: "qubani",
