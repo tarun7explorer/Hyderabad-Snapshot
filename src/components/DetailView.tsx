@@ -8,9 +8,10 @@ interface DetailViewProps {
   isOpen: boolean;
   onClose: () => void;
   onNavigate: (direction: "prev" | "next") => void;
+  onJumpTo?: (sectionId: string) => void;
 }
 
-const DetailView = ({ section, isOpen, onClose, onNavigate }: DetailViewProps) => {
+const DetailView = ({ section, isOpen, onClose, onNavigate, onJumpTo }: DetailViewProps) => {
   if (!section) return null;
 
   const currentIndex = sections.findIndex((s) => s.id === section.id);
@@ -236,15 +237,8 @@ const DetailView = ({ section, isOpen, onClose, onNavigate }: DetailViewProps) =
                     }}
                     whileHover={{ scale: 1.2 }}
                     onClick={() => {
-                      const diff = i - currentIndex;
-                      if (diff < 0) {
-                        for (let j = 0; j < Math.abs(diff); j++) {
-                          setTimeout(() => onNavigate("prev"), j * 100);
-                        }
-                      } else if (diff > 0) {
-                        for (let j = 0; j < diff; j++) {
-                          setTimeout(() => onNavigate("next"), j * 100);
-                        }
+                      if (s.id !== section.id) {
+                        onJumpTo?.(s.id);
                       }
                     }}
                   />

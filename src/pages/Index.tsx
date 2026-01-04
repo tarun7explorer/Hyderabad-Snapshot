@@ -64,6 +64,13 @@ const Index = () => {
     }
   };
 
+  const handleJumpTo = (sectionId: string) => {
+    const section = sections.find((s) => s.id === sectionId);
+    if (section) {
+      setSelectedSection(section);
+    }
+  };
+
   return (
     <main className="min-h-screen" style={{ background: "hsl(0 0% 2%)" }}>
       {/* Hero Section - flush with black section */}
@@ -283,6 +290,7 @@ const Index = () => {
         isOpen={isDetailOpen}
         onClose={() => setIsDetailOpen(false)}
         onNavigate={handleNavigate}
+        onJumpTo={handleJumpTo}
       />
     </main>
   );
