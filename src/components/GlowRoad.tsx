@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, useMemo } from "react";
 import { motion } from "framer-motion";
-import { sections } from "@/data/hyderabadContent";
+import { sections, Section } from "@/data/hyderabadContent";
 import FeatureCard from "./FeatureCard";
 import UnifiedGlowPath from "./UnifiedGlowPath";
 
