@@ -38,7 +38,7 @@ export const sections: Section[] = [
         id: "biryani-paradise",
         name: "Paradise Biryani",
         description: "The legendary crown jewel of Hyderabadi dum biryani since 1953.",
-        image: "https://images.unsplash.com/photo-1563379091339-03b21bc4a4f8?auto=format&fit=crop&w=800&q=80",
+        image: "https://ibb.co/zTgt0RfH",
       },
       {
         id: "biryani-bawarchi",
