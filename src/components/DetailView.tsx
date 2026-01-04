@@ -48,30 +48,38 @@ const DetailView = ({ section, isOpen, onClose, onNavigate, onJumpTo }: DetailVi
             {/* Navigation Controls - Bottom */}
             <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[60] flex gap-3">
               <motion.button
-                onClick={() => onNavigate("prev")}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  if (hasPrev) onNavigate("prev");
+                }}
                 disabled={!hasPrev}
                 className="p-3 rounded-full transition-all disabled:opacity-30 disabled:cursor-not-allowed"
                 style={{
                   background: "hsla(0, 0%, 100%, 0.08)",
                   backdropFilter: "blur(16px)",
                   border: "1px solid hsla(0, 0%, 100%, 0.15)",
+                  pointerEvents: "auto",
                 }}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={hasPrev ? { scale: 1.1 } : {}}
+                whileTap={hasPrev ? { scale: 0.95 } : {}}
               >
                 <ChevronLeft className="w-6 h-6" />
               </motion.button>
               <motion.button
-                onClick={() => onNavigate("next")}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  if (hasNext) onNavigate("next");
+                }}
                 disabled={!hasNext}
                 className="p-3 rounded-full transition-all disabled:opacity-30 disabled:cursor-not-allowed"
                 style={{
                   background: "hsla(0, 0%, 100%, 0.08)",
                   backdropFilter: "blur(16px)",
                   border: "1px solid hsla(0, 0%, 100%, 0.15)",
+                  pointerEvents: "auto",
                 }}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={hasNext ? { scale: 1.1 } : {}}
+                whileTap={hasNext ? { scale: 0.95 } : {}}
               >
                 <ChevronRight className="w-6 h-6" />
               </motion.button>
