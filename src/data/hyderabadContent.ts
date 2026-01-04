@@ -116,7 +116,7 @@ export const sections: Section[] = [
         id: "mandi",
         name: "Barkas Mandi",
         description: "Traditional Arabian meat and rice dish served on a large platter, a Gachibowli favorite.",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Chicken_Mandi.jpg/800px-Chicken_Mandi.jpg",
+        image: "file:///C:/Users/lalitha/Downloads/barkas.jpg",
       },
       {
         id: "osmania-biscuit",
