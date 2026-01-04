@@ -14,9 +14,19 @@ interface DetailViewProps {
 const DetailView = ({ section, isOpen, onClose, onNavigate, onJumpTo }: DetailViewProps) => {
   if (!section) return null;
 
+  const totalSections = sections.length; // Should be 6
   const currentIndex = sections.findIndex((s) => s.id === section.id);
   const hasPrev = currentIndex > 0;
-  const hasNext = currentIndex < sections.length - 1;
+  const hasNext = currentIndex < totalSections - 1;
+  
+  console.log('DetailView Navigation:', { 
+    currentSection: section.id, 
+    currentIndex, 
+    totalSections, 
+    hasPrev, 
+    hasNext,
+    allSectionIds: sections.map(s => s.id)
+  });
 
   return (
     <AnimatePresence>
