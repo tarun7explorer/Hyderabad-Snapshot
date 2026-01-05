@@ -172,7 +172,7 @@ const Index = () => {
                       textShadow: "0 0 20px hsla(0, 0%, 100%, 0.15)",
                     }}
                   >
-                    Many things are yet to be explored in Hyderabad.
+                    Many things are yet to be explored in Hyderabad. Stay Tuned!!
                   </p>
                   <p
                     className="text-2xl sm:text-3xl md:text-4xl font-serif italic"
@@ -184,7 +184,7 @@ const Index = () => {
                       `,
                     }}
                   >
-                    "Hyderabad is an emotion."
+                    "Hyderabad is an emotion"
                   </p>
                 </div>
               </div>
