@@ -134,8 +134,6 @@ export const sections: Section[] = [
       { id: "bonalu", name: "Bonalu Festival", description: "Vibrant processions honoring Goddess Mahakali.", image: "/culture/Bonalu.jpg" },
       { id: "bathukamma", name: "Bathukamma", description: "Telangana's floral festival celebrating nature.", image: "/culture/Bakthukamma.jpg" },
       { id: "qawwali", name: "Deccani Qawwali", description: "Soul-stirring Sufi devotional music.", image: "/culture/Deccani_qqwwali.jpg" },
-      { id: "kuchipudi", name: "Kuchipudi Dance", description: "Classical Telugu dance form.", image: "/culture/Bonalu.jpg" },
-      { id: "pearls", name: "Hyderabadi Pearls", description: "Exquisite craftsmanship from the 'City of Pearls'.", image: "/culture/Laad_Bazar.jpg" },
       { id: "bidri", name: "Bidriware Art", description: "Unique silver-on-black metalwork.", image: "/culture/Bidriwar_art.jpg" },
       { id: "pochampally", name: "Pochampally Ikat", description: "UNESCO-recognized handloom weaves.", image: "/culture/Pochampally.jpg" },
       { id: "laad-bazaar", name: "Laad Bazaar", description: "Historic market for bangles.", image: "/culture/Laad_Bazar.jpg" },
